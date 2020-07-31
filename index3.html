@@ -16,16 +16,16 @@
 <link rel='stylesheet' type='text/css' href="css/style.css">
 <link rel='stylesheet' type='text/css' href="css/elastislide.css">
 <link rel='stylesheet' type='text/css' href="css/layout.css">
-<link rel="stylesheet" type="text/css" media="screen" href="css/sequence.css"/>
+<link rel="stylesheet" type="text/css" media="screen" href="css/slider2.css"/>
 </head>
 <body>
 <div class="navigation">
   <div id="navigation" class="row-fluid">
     <div class="wrapper">
-      <div class="span3 logo"> <a href="#home" class="scroll">
+      <div class="span4 logo"> <a href="#home" class="scroll">
         <h2>Sytic...</h2>
         </a> </div>
-      <div class="span9 menu">
+      <div class="span8 menu">
         <ul class="main-nav">
           <li class="current"> <a class="scroll" href="#home">Home</a> </li>
           <li> <a class="scroll" href="#service">Services</a> </li>
@@ -56,30 +56,31 @@
 <!-- End of Navigation -->
 
 <div id="home" class="row-fluid">
-  <div id="sequence"> <img class="sequence-prev" src="images/arrow-left.png" alt="Previous" /> <img class="sequence-next" src="images/arrow-right.png" alt="Next" />
-    <ul class="sequence-canvas">
-      <li class="animate-in"> <img class="slide_bg" src="images/slide-01.jpg" alt="slider background" /> <span class="subhead">Sytic...</span>
-        <h2 class="slhead">WE ARE CREATING DREAM</h2>
-        <p class="slpara">YOU WANT MORE CRAZY? ARE YOU READY FOR SYTIC ?</p>
-        <span class="sllink"><a href="#">GET IT NOW</a></span> </li>
-      <li> <span class="subhead">Sytic...</span>
-        <h2 class="slhead white">dreams make perfect</h2>
-        <p class="slpara">YOU WANT MORE CRAZY? ARE YOU READY FOR SYTIC ?</p>
-        <span class="sllink"><a href="#">GET IT NOW</a></span> <img class="slide_bg" src="images/slide-02.jpg" alt="slider background" /> </li>
-      <li> <span class="subhead">Sytic...</span>
-        <h2 class="slhead">WE ARE CREATIVE</h2>
-        <p class="slpara">YOU WANT MORE CRAZY? ARE YOU READY FOR SYTIC ?</p>
-        <img class="slide_bg" src="images/slide-03.jpg" alt="slider background" /> <span class="sllink"><a href="#">GET IT NOW</a></span> </li>
-      <li> <span class="subhead">Sytic...</span>
-        <h2 class="slhead">CREATIVITY & INNOVATION</h2>
-        <p class="slpara">YOU WANT MORE CRAZY? ARE YOU READY FOR SYTIC ?</p>
-        <span class="sllink"><a href="#">GET IT NOW</a></span> <img class="slide_bg" src="images/slide-04.jpg" alt="slider background" /> </li>
-      <li> <span class="subhead">Sytic...</span>
-        <h2 class="slhead">creativity explored idea</h2>
-        <p class="slpara">YOU WANT MORE CRAZY? ARE YOU READY FOR SYTIC ?</p>
-        <span class="sllink"><a href="#">GET IT NOW</a></span> <img class="slide_bg" src="images/slide-05.jpg" alt="slider background" /> </li>
-    </ul>
-  </div>
+  <div id="homeSlide">
+			<img class="sequence-prev" src="images/slide_arow_left.png" alt="Previous" />
+			<img class="sequence-next" src="images/slide_arow_right.png" alt="Next" />
+
+			<ul class="sequence-canvas">
+				<li class="animate-in">
+					<span class="subhead">Sytic...</span>
+                    <h2 class="slhead">CREATIVITY & INNOVATION</h2>
+                    <p class="slpara">YOU WANT MORE CRAZY? ARE YOU READY FOR SYTIC ?</p>
+                    <p class="slinfo">WE MAKE BEAUTIFUL & RESPONSIVE LANDING PAGES</p>
+                    <p class="slbut"><a href="#"><img src="images/purchase_bgn.png" alt=""></a></p>
+                    <img class="slide_bg" src="images/homeSlide_bg1.jpg" alt="slider background" />
+				</li>
+				<li>
+                	<span class="subhead">Sytic...</span>
+                    <h2 class="slhead white">dreams make perfect</h2>
+                    <p class="slpara">YOU WANT MORE CRAZY? ARE YOU READY FOR SYTIC ?</p>
+                    <p class="slbut"><a href="#"><img src="images/purchase_bgn.png" alt=""></a></p>
+                  <p class="slinfo">WE MAKE BEAUTIFUL & RESPONSIVE LANDING PAGES</p>
+					
+					<img class="slide_bg" src="images/slide-02.jpg" alt="slider background" />
+				</li>
+				
+			</ul>
+		</div>
 </div>
 <!-- End of Slider -->
 
@@ -309,9 +310,9 @@
 <div id="work-view"> </div>
 <!-- end of Single Work View -->
 
-<div id="anotherClient" class="row-fluid">
-  <div class="wrapper">
-    <div class="cycle-slideshow" data-cycle-fx="fade" data-cycle-timeout="2500" data-cycle-slides="> div">
+<div class="clientSpece_a row-fluid">
+	<div class="wrapper">
+    	<div class="cycle-slideshow" data-cycle-fx="fade" data-cycle-timeout="2500" data-cycle-slides="> div">
       <div>
         <div class="row-fluid">
           <h2>KNOW WHAT? OUR CLIENT ARE SAYING THAT ...</h2>
@@ -352,10 +353,9 @@
         </div>
       </div>
     </div>
-  </div>
+    </div>
 </div>
-<!-- End of Another Client -->
-
+<!-- End of Client Spece -->
 
 <div id="about" class="row-fluid">
   <div class="row-fluid row-shade"></div>
@@ -559,9 +559,9 @@
           </div>
          
           <div class="pcontent">
-          	<h4>Basic</h4>
+            <h4>Basic</h4>
             <ul>
-            	<li>Web Development</li>
+              <li>Web Development</li>
                 <li>Email Marketing</li>
                 <li>JavaScript</li>
                 <li>Web Design</li>
@@ -573,8 +573,8 @@
           </div>
           
           <div class="pbot">
-          	<p class="wbicon"></p>
-          	<div class="pbotw"><a href="#">purchase now</a></div>
+            <p class="wbicon"></p>
+            <div class="pbotw"><a href="#">purchase now</a></div>
           </div>          
         </div>
       </div>
@@ -591,9 +591,9 @@
           </div>
          
           <div class="pcontent">
-          	<h4>Basic</h4>
+            <h4>Basic</h4>
             <ul>
-            	<li>Web Development</li>
+              <li>Web Development</li>
                 <li>Email Marketing</li>
                 <li>JavaScript</li>
                 <li>Web Design</li>
@@ -605,8 +605,8 @@
           </div>
           
           <div class="pbot">
-          	<p class="wbicon"></p>
-          	<div class="pbotw"><a href="#">purchase now</a></div>
+            <p class="wbicon"></p>
+            <div class="pbotw"><a href="#">purchase now</a></div>
           </div>          
         </div>
       </div>
@@ -623,9 +623,9 @@
           </div>
          
           <div class="pcontent">
-          	<h4>Basic</h4>
+            <h4>Basic</h4>
             <ul>
-            	<li>Web Development</li>
+              <li>Web Development</li>
                 <li>Email Marketing</li>
                 <li>JavaScript</li>
                 <li>Web Design</li>
@@ -637,8 +637,8 @@
           </div>
           
           <div class="pbot">
-          	<p class="wbicon"></p>
-          	<div class="pbotw"><a href="#">purchase now</a></div>
+            <p class="wbicon"></p>
+            <div class="pbotw"><a href="#">purchase now</a></div>
           </div>          
         </div>
       </div>
@@ -655,9 +655,9 @@
           </div>
          
           <div class="pcontent">
-          	<h4>Basic</h4>
+            <h4>Basic</h4>
             <ul>
-            	<li>Web Development</li>
+              <li>Web Development</li>
                 <li>Email Marketing</li>
                 <li>JavaScript</li>
                 <li>Web Design</li>
@@ -669,8 +669,8 @@
           </div>
           
           <div class="pbot">
-          	<p class="wbicon"></p>
-          	<div class="pbotw"><a href="#">purchase now</a></div>
+            <p class="wbicon"></p>
+            <div class="pbotw"><a href="#">purchase now</a></div>
           </div>          
         </div>
       </div>
@@ -680,7 +680,7 @@
 <!-- End Price Plan-->
 
 <div class="clientSpece row-fluid">
-  <div class="wrapper">
+	<div class="wrapper">
     <div class="cycle-slideshow" data-cycle-fx="fade" data-cycle-timeout="2500" data-cycle-slides="> div">
       <div>
         <div class="row-fluid">
@@ -809,7 +809,6 @@
 <script type="text/javascript" src="js/jquery.quicksand.js"></script> 
 <script type="text/javascript" src="js/jquery.sequence-min.js"></script> 
 <script type="text/javascript" src="js/jquery.parallax-1.1.3.js"></script> 
-<script src="js/footer.js"></script> 
-
+<script src="js/footer.js"></script>
 </body>
 </html>

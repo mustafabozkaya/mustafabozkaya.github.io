@@ -272,7 +272,7 @@ p{
 
 /* End Service */
 #feature{
-	background:url("../images/feature.jpg") no-repeat 50% 0;
+	background:url(../images/parallaxbg1.jpg) center center no-repeat fixed;
 	height:532px;
 	-webkit-box-shadow:    inset 0 0 25px 15px rgba(0, 0, 0, 0.75);
 	   -moz-box-shadow:    inset 0 0 25px 15px rgba(0, 0, 0, 0.75);
@@ -938,7 +938,7 @@ ul.header-social-icon {
 
 /* End about */
 #client{
-	background:url("../images/client.jpg") no-repeat 50% 0;
+	background:url(../images/parallaxbg2.jpg) center center no-repeat fixed;
 	height:285px;
 }
 
@@ -997,6 +997,246 @@ ul.header-social-icon {
 
 /* end client */
 
+/* Price Plan */
+#price{
+	background:#fff;
+	border-top:1px solid #dedede;
+}
+.price_plane {
+	padding:30px 0 40px;}
+
+#price h2{
+	font-weight:400;
+	text-align:center;
+	margin-bottom: 27px;
+	text-transform: uppercase;
+}
+#price p{
+	font-weight:400;
+	text-align:center;
+	line-height: 20px;
+}
+.plan {
+	float:left;
+	width:100%;
+	margin:20px 0;}
+.plan .phead {
+    overflow: visible;
+    position: relative;
+}
+.plan .pw {
+    border: 1px solid #DDDDDD;
+    padding: 4px 4px 27px;
+    position: relative;
+	overflow:hidden;
+}
+.plan:hover .pw  {
+    border: 1px solid #262626;
+}
+.plan .planprice {
+	float:left;
+	width:100%;
+	background:#dddddd;
+	text-align:center;}
+.plan .planprice.gold { background:#ff7f00; color:#fff;}
+.plan .planprice h3 {
+	font-size:38px;
+	margin:0;
+	font-weight:400;
+	padding:22px 0 10px;
+	}
+.plan .planprice p {
+	padding-bottom:10px;}
+.plan .wicon{
+	background:url("../images/wicon.png") no-repeat;
+	bottom: 15px;
+    height: 24px;
+    left: 41%;
+    position: relative;
+    width: 41px;
+}
+.plan:hover .wicon{
+	background:url("../images/wiconh.png") no-repeat;
+	bottom: 14px;
+    height: 24px;
+    left: 41%;
+    position: relative;
+    width: 41px;
+}
+.pcontent {
+	position:relative;
+	padding:0;
+	width:100%;
+	text-align:center;}
+.pcontent h4 {
+	font-size:26px;
+	font-weight:400;
+	text-transform:uppercase;}	
+.pcontent ul {
+	float:left;
+	width:100%;
+	position:relative;
+	margin:15px 0 20px 0;
+	padding:0;
+	}
+.pcontent ul li {
+	position:relative;
+	display:list-item;
+	list-style:none;
+	margin-bottom:10px;
+	font-size:15px;
+	text-align:center;}
+	
+.plan .pbot {
+    overflow: visible;
+    position: relative;
+	float:left;
+	width:100%;
+}
+.plan .pbotw {
+    border: 1px solid #DDDDDD;
+    padding: 27px 4px 4px;
+    position: relative;
+	overflow:hidden;
+}
+.plan:hover .pbotw  {
+    border: 1px solid #262626;
+}
+.plan .pbot .pnw {
+	float:left;
+	width:100%;
+	background:#dddddd;
+	text-align:center;
+	}
+
+.plan .wbicon{
+	background: url(../images/wiconb.jpg) no-repeat;
+	top: 15px;
+    height: 24px;
+    left: 41%;
+    position: relative;
+    width: 41px;
+	margin:0;
+	z-index:100;
+}
+.plan:hover .wbicon{
+	background: url(../images/wiconh_b.jpg) no-repeat;
+	top: 14px;
+}
+
+.plan .pbotw a {
+	float:left;
+	width:100%;
+	padding:15px 0;
+	background:#ff7f00;
+	color:#fff;
+	text-transform:uppercase;
+	font-size:20px;
+	text-align:center;}
+.plan .pbotw a:hover { background:#223146;}
+
+/* End about */
+#anotherClient{
+	background:url(../images/parallaxbg3.jpg) center center no-repeat fixed;
+	height:285px;
+}
+
+#anotherClient h2{
+	font-weight:400;
+	text-align:center;
+	color:#fff;
+	margin: 35px auto 20px;
+    text-transform: uppercase;
+}
+
+#anotherClient p.comments{
+	font-weight:400;
+	font-style:italic;
+	color:#fff;
+	padding:0 63px;
+	text-align:center;
+	margin:0 auto;
+}
+
+#anotherClient div.carrow{
+	background:url("../images/carrow.png") no-repeat 50% 0%;
+	height:6px;
+	margin-top:20px;
+}
+
+#anotherClient p.c-name{
+	width:166px;
+	height:60px;
+	background-color:#26354a;
+	margin:0 auto;
+	border-radius:3px;
+	text-align:center;
+	font-size:15px;
+	color:#fff;
+}
+
+#anotherClient p.c-name label{
+	position:relative;
+	top:20%;
+}
+
+#anotherClient p.c-name span{
+	font-size:20px;
+	font-weight:400;
+}
+/*client spece */
+.clientSpece, .clientSpece_a {
+	background:url(../images/parallaxbg3.jpg) center center no-repeat fixed;
+	height:285px;
+}
+
+.clientSpece  h2, .clientSpece_a  h2{
+	font-weight:400;
+	text-align:center;
+	color:#fff;
+	margin: 35px auto 20px;
+    text-transform: uppercase;
+}
+
+.clientSpece p.comments, .clientSpece_a p.comments{
+	font-weight:400;
+	font-style:italic;
+	color:#fff;
+	padding:0 63px;
+	text-align:center;
+	margin:0 auto;
+}
+
+.clientSpece div.carrow, .clientSpece_a div.carrow{
+	background:url("../images/carrow.png") no-repeat 50% 0%;
+	height:6px;
+	margin-top:20px;
+}
+
+.clientSpece p.c-name, .clientSpece_a p.c-name{
+	width:166px;
+	height:60px;
+	background-color:#26354a;
+	margin:0 auto;
+	border-radius:3px;
+	text-align:center;
+	font-size:15px;
+	color:#fff;
+}
+
+.clientSpece p.c-name label, .clientSpece_a p.c-name label{
+	position:relative;
+	top:20%;
+}
+
+.clientSpece p.c-name span, .clientSpece_a p.c-name span{
+	font-size:20px;
+	font-weight:400;
+}
+
+/* end client */
+
+/* End price plane */
 #contact{
 	position:relative;
 }

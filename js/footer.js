@@ -224,3 +224,25 @@
 	});
 	
 
+$(document).ready(function(){
+    var options = {
+        autoPlay: true,
+        nextButton: true,
+        prevButton: true,
+        preloader: true,
+        navigationSkip: false
+    };
+    var sequence = $("#sequence").sequence(options).data("sequence");
+
+    sequence.afterLoaded = function(){
+        $(".sequence-prev, .sequence-next").fadeIn(500);
+    }
+});
+//Parallax/
+$(window).load(function(){
+	$('#feature').parallax('50%',.2);
+	$('#anotherClient').parallax('50%',.2);
+	$('#client').parallax('50%',.2);
+	$('.clientSpece').parallax('50%',.2);
+	$('.clientSpece_a').parallax('50%',.2);
+});
