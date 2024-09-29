@@ -2,13 +2,34 @@ document.addEventListener('DOMContentLoaded', function() {
   const projectGrid = document.getElementById('project-grid');
   const projectFilters = document.getElementById('project-filters');
   const projectModal = document.getElementById('projectModal');
+  const heroCarousel = document.getElementById('heroCarousel');
+
+  // Hero carousel images
+  const heroImages = [
+    'images/slide-01.jpg',
+    'images/homeSlide_bg1.jpg',
+	'images/erp_mes.jpg',
+    'images/slide-03.jpg',
+	'images/slide-04.jpg',
+	'images/slide-05.jpg',
+  ];
+
+  // Populate hero carousel
+  function populateHeroCarousel() {
+    const carouselInner = heroCarousel.querySelector('.carousel-inner');
+    carouselInner.innerHTML = heroImages.map((img, index) => `
+      <div class="carousel-item ${index === 0 ? 'active' : ''}">
+        <img src="${img}" class="d-block w-100" alt="Hero image ${index + 1}">
+      </div>
+    `).join('');
+  }
 
   // Generate project cards
   function generateProjectCards() {
     projectGrid.innerHTML = projects.map(project => `
       <div class="col-md-4 mb-4 ${project.categories.join(' ')}">
         <div class="card project-card">
-          <img src="${project.image}" class="card-img-top" alt="${project.title}">
+          <img src="${project.images[0]}" class="card-img-top" alt="${project.title}">
           <div class="card-body">
             <h5 class="card-title">${project.title}</h5>
             <p class="card-text">${project.shortDescription}</p>
@@ -24,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const categories = ['all', ...new Set(projects.flatMap(project => project.categories))];
     projectFilters.innerHTML = categories.map(category => `
       <button class="btn me-2 mb-2 filter-btn ${category === 'all' ? 'active' : ''}" data-filter="${category}">
-        ${category.charAt(0).toUpperCase() + category.slice(1).replace('_', ' ')}
+        ${category.toUpperCase().replace('_', ' ')}
       </button>
     `).join('');
   }
@@ -56,6 +77,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     modalTitle.textContent = project.title;
     modalBody.innerHTML = `
+      <div id="projectCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          ${project.images.map((img, index) => `
+            <div class="carousel-item ${index === 0 ? 'active' : ''}">
+              <img src="${img}" class="d-block w-100" alt="${project.title} - Image ${index + 1}">
+            </div>
+          `).join('')}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
       <h6>Project Overview</h6>
       <p>${project.longDescription}</p>
       <h6>Technologies Used</h6>
@@ -74,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Initialize the project section
+  populateHeroCarousel();
   generateProjectCards();
   generateFilterButtons();
 

@@ -32,11 +32,25 @@
     </header>
 
     <main>
-      <section id="home" class="hero d-flex align-items-center" style="background-image: url('images/erp_mes.jpg'); background-size: cover; background-position: center; height: 100vh;">
-        <div class="container text-center text-white">
-          <h1 class="display-4">Mustafa Bozkaya</h1>
-          <p class="lead">Machine Learning R&D Engineer | Deep Learning Enthusiast</p>
-          <a href="#projects" class="btn btn-primary btn-lg">View My Work</a>
+      <!-- Hero Section -->
+      <section id="home" class="hero">
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <!-- Carousel items will be dynamically added here -->
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <div class="hero-content">
+          <h1>Mustafa Bozkaya</h1>
+          <p>Full Stack Developer | AI Enthusiast | Problem Solver</p>
+          <a href="#projects" class="cta-button">View My Work</a>
         </div>
       </section>
 

@@ -54,14 +54,40 @@ h2 {
 
 /* Hero Section Styles */
 .hero {
-    margin-top: 5rem;
+    position: relative;
+    height: 100vh;
     color: white;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    background: linear-gradient(rgba(247, 164, 164, 0.5), rgba(180, 234, 255, 0.5));
+}
+
+#heroCarousel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#heroCarousel .carousel-inner,
+#heroCarousel .carousel-item {
+    height: 100%;
+}
+
+#heroCarousel .carousel-item img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 10px;
 }
 
 .hero h1 {
@@ -384,4 +410,48 @@ footer .social-links a {
 .filter-btn.active {
   background-color: #007bff;
   color: white;
+}
+
+/* Carousel control styles */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+  opacity: 0.8;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  background-size: 50% 50%;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 1;
+}
+
+/* Ensure the carousel doesn't overflow the modal */
+.modal-body .carousel-inner img {
+  max-height: 60vh;
+  object-fit: contain;
+}
+
+/* Add indicators to show multiple images */
+.carousel-indicators {
+  bottom: -50px;
+}
+
+.carousel-indicators button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #007bff;
+  opacity: 0.5;
+}
+
+.carousel-indicators button.active {
+  opacity: 1;
 }
