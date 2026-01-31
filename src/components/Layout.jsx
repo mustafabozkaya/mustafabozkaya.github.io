@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/global.css';
-import { FaGithub, FaLinkedin, FaBars, FaTimes, FaSun, FaMoon } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaBars, FaTimes, FaSun, FaMoon, FaFileAlt } from 'react-icons/fa';
+import { FiFileText } from 'react-icons/fi';
 
 const Layout = ({ children }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,11 +36,28 @@ const Layout = ({ children }) => {
               <a href="#projects" onClick={() => setMobileMenuOpen(false)}>Projects</a>
               <a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a>
               <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+              <a
+                href="/assets/Mustafa_Bozkaya_CV.pdf"
+                download="Mustafa_Bozkaya_CV.pdf"
+                className="nav-resume-mobile"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <FiFileText /> Resume
+              </a>
             </div>
 
-            <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle Theme">
-              {theme === 'dark' ? <FaSun /> : <FaMoon />}
-            </button>
+            <div className="nav-desktop-actions">
+              <a
+                href="/assets/Mustafa_Bozkaya_CV.pdf"
+                download="Mustafa_Bozkaya_CV.pdf"
+                className="resume-cta"
+              >
+                <FiFileText style={{ marginRight: '6px' }} /> Resume
+              </a>
+              <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle Theme">
+                {theme === 'dark' ? <FaSun /> : <FaMoon />}
+              </button>
+            </div>
 
             <button className="mobile-toggle" onClick={toggleMenu}>
               {mobileMenuOpen ? <FaTimes /> : <FaBars />}
@@ -145,6 +163,39 @@ const Layout = ({ children }) => {
         .theme-toggle:hover {
           transform: rotate(30deg) scale(1.1);
         }
+
+        .nav-desktop-actions {
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-sm);
+        }
+
+        .resume-cta {
+          display: flex;
+          align-items: center;
+          padding: 8px 16px;
+          background: var(--accent-gradient);
+          color: white !important;
+          border-radius: 6px;
+          font-weight: 600;
+          font-size: 0.9rem;
+          transition: transform 0.2s, box-shadow 0.2s;
+          box-shadow: 0 4px 10px rgba(56, 189, 248, 0.3);
+        }
+
+        .resume-cta:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 15px rgba(56, 189, 248, 0.5);
+        }
+
+        .nav-resume-mobile {
+          display: none;
+          align-items: center;
+          gap: 8px;
+          margin-top: var(--spacing-sm);
+          color: var(--accent-primary) !important;
+          font-weight: 700;
+        }
         
         .mobile-toggle {
           display: none;
@@ -202,6 +253,14 @@ const Layout = ({ children }) => {
           
           .mobile-toggle {
             display: block;
+          }
+
+          .nav-resume-mobile {
+            display: flex;
+          }
+
+          .resume-cta {
+            display: none;
           }
           
           .footer-content {

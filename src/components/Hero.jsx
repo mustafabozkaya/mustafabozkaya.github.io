@@ -1,5 +1,5 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import { FiDownload } from 'react-icons/fi';
 
 const Hero = () => {
   const containerVariants = {
@@ -53,6 +53,9 @@ const Hero = () => {
 
           <motion.div variants={itemVariants} className="hero-actions">
             <a href="#projects" className="btn btn-primary">Discover Projects</a>
+            <a href="/assets/Mustafa_Bozkaya_CV.pdf" download="Mustafa_Bozkaya_CV.pdf" className="btn btn-cv">
+              <FiDownload style={{ marginRight: '8px' }} /> Download CV
+            </a>
             <a href="#about" className="btn btn-outline">Technical Background</a>
           </motion.div>
 
@@ -176,7 +179,7 @@ const Hero = () => {
         
         .btn {
           padding: 1rem 2.5rem;
-          border-radius: 8px;
+          border-radius: 12px;
           font-weight: 700;
           transition: all var(--transition-normal);
           text-transform: uppercase;
@@ -184,6 +187,7 @@ const Hero = () => {
           letter-spacing: 1.5px;
           display: inline-flex;
           align-items: center;
+          gap: 10px;
         }
         
         .btn-primary {
@@ -206,6 +210,44 @@ const Hero = () => {
           background: var(--accent-primary);
           color: white;
           transform: translateY(-3px);
+        }
+
+        .btn-cv {
+          background: rgba(255, 255, 255, 0.03);
+          color: var(--text-primary);
+          border: 1px solid var(--glass-border);
+          backdrop-filter: blur(12px);
+          position: relative;
+          overflow: hidden;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-cv::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.08),
+            transparent
+          );
+          transition: 0.6s;
+        }
+
+        .btn-cv:hover::before {
+          left: 100%;
+        }
+
+        .btn-cv:hover {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: var(--accent-primary);
+          transform: translateY(-5px);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 
+                      0 0 20px rgba(56, 189, 248, 0.2);
         }
 
         /* Terminal Micro-component */
