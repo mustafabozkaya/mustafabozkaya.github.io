@@ -1,5 +1,17 @@
 export const projects = [
-    // --- SENIOR AI & AGENTIC SYSTEMS (NEW) ---
+    // --- OLLAMA CHAT APP (PRIORITIZED) ---
+    {
+        id: 'ollama-chat',
+        title: 'Ollama Streamlit Chat',
+        shortDescription: 'Desktop-grade UI for local LLM interaction with chat history and model switching.',
+        longDescription: 'Built a private LLM deployment solution using Ollama and Streamlit. This application allows users to run and interact with powerful large language models locally, ensuring data privacy and offline accessibility with a modern UI.',
+        categories: ['Web', 'Machine Learning'],
+        technologies: ['Python', 'Streamlit', 'Ollama', 'Docker', 'Pandas'],
+        images: ['./assets/ollama_cover.png'],
+        repoLink: 'https://github.com/mustafabozkaya/ollama-chat-app'
+    },
+
+    // --- SENIOR AI & AGENTIC SYSTEMS ---
     {
         id: 'ai-system-architect',
         title: 'AI System Architect Agent',
@@ -46,7 +58,7 @@ export const projects = [
         shortDescription: 'Knowledge retrieval system with multi-step logical deduction.',
         longDescription: 'A production-grade RAG pipeline that uses reasoning models to validate retrieved context before generating answers, significantly reducing hallucinations.',
         categories: ['Agentic AI', 'Machine Learning'],
-        technologies: ['Ollama', 'Gemma', 'PGVector', 'Python'],
+        technologies: ['Ollama', 'Gemma', 'PGVector', 'Python', 'LangChain'],
         images: ['./assets/rag_cover.png'],
         repoLink: 'https://github.com/mustafabozkaya/Awesome_Agent_Rag_LMMs_apps'
     },
@@ -60,7 +72,7 @@ export const projects = [
         categories: ['Robotics'],
         technologies: ['C++', 'ROS2', 'Gazebo', 'SLAM'],
         images: ['./assets/ros_cover.png'],
-        repoLink: 'https://github.com/mustafabozkaya'
+        repoLink: 'https://github.com/mustafabozkaya/Ros-Based-Package-and-Robots'
     },
     {
         id: 'cv-retail',
@@ -70,10 +82,10 @@ export const projects = [
         categories: ['Computer Vision', 'Machine Learning'],
         technologies: ['Python', 'PyTorch', 'OpenCV', 'CUDA'],
         images: ['https://mustafabozkaya.github.io/images/autonomous-retail.jpg'],
-        repoLink: 'https://github.com/mustafabozkaya/autonomous-retail-vision'
+        repoLink: 'https://github.com/mustafabozkaya'
     },
 
-    // --- CORE PRODUCTION SYSTEMS (LEGACY REFINED) ---
+    // --- CORE PRODUCTION SYSTEMS ---
     {
         id: 'drug-discovery',
         title: 'Generative AI for Drug Discovery',
@@ -167,7 +179,7 @@ export const projects = [
         repoLink: 'https://github.com/mustafabozkaya/ios-developer-toolkit-app'
     },
 
-    // --- STARTER & UTILITIES (ROUNDING TO 25+) ---
+    // --- AGENTIC UTILITIES & NLP ---
     {
         id: 'ai-blog-podcast',
         title: 'AI Blog to Podcast Agent',
@@ -269,13 +281,13 @@ export const projects = [
         repoLink: 'https://github.com/mustafabozkaya'
     },
     {
-        id: 'ollama-chat',
-        title: 'Ollama Streamlit Chat',
-        shortDescription: 'Desktop-grade UI for local LLM interaction.',
-        longDescription: 'A ChatGPT-like interface for interacting with local models via Ollama, featuring chat history and model switching.',
-        categories: ['Web', 'Machine Learning'],
-        technologies: ['Python', 'Streamlit', 'Ollama'],
-        images: ['https://mustafabozkaya.github.io/images/chatbot2.jpg'],
-        repoLink: 'https://github.com/mustafabozkaya/Awesome_Agent_Rag_LMMs_apps'
+        id: 'discord-bot-go',
+        title: 'ChatGPT Discord Bot',
+        shortDescription: 'A scalable, event-driven Discord microservice built in Go.',
+        longDescription: 'Developed a high-performance Discord bot in Go, integrating OpenAI\'s GPT models to provide intelligent, real-time responses. The backend is designed as a scalable microservice.',
+        categories: ['Go', 'Web'],
+        technologies: ['Go', 'Discordgo', 'OpenAI API', 'Docker'],
+        images: ['./assets/ai_arch_cover.png'],
+        repoLink: 'https://github.com/mustafabozkaya/chatgpt-discord-bot'
     }
 ];
