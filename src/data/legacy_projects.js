@@ -1,27 +1,9 @@
 export const legacyProjects = [
   {
     id: 1,
-    title: "Awesome Agent RAG LLMs Apps",
-    shortDescription: "A comprehensive orchestration of multi-agent RAG workflows designed for complex reasoning.",
-    images: ["images/agentic-rag.jpg", "images/chatbot2.jpg", "images/chatbot3.jpg"],
-    categories: ["python", "langchain", "rag", "agents", "machinelearning"],
-    longDescription: "Developed an advanced Agentic RAG system that uses multi-agent orchestration for complex information retrieval and reasoning. The system integrates multiple LLM providers and specialized agents to handle diverse research tasks with high precision.",
-    technologies: ["Python", "LangChain", "OpenAI", "FAISS", "Docker", "FastAPI"],
-    features: [
-      "Multi-agent task decomposition and execution",
-      "Dynamic prompt engineering and tool selection",
-      "Robust error handling and agent self-correction",
-      "Optimized vector search with hybrid retrieval"
-    ],
-    keyFeatures: ["Agentic RAG", "Multi-Agent Workflows", "Hybrid Search"],
-    results: "Achieved significant improvements in retrieval accuracy and task completion rates for complex queries.",
-    repoLink: "https://github.com/mustafabozkaya/Awesome_Agent_Rag_LMMs_apps"
-  },
-  {
-    id: 2,
     title: "Ollama Chat App",
     shortDescription: "Private and local LLM deployment with a sleek, responsive chat interface.",
-    images: ["images/ollama-chat.jpg", "images/chatbot2.jpg", "images/chatbot3.jpg"],
+    images: ["assets/ollama_cover.png", "images/chatbot2.jpg", "images/chatbot3.jpg"],
     categories: ["python", "streamlit", "ollama", "localllm"],
     longDescription: "Built a private LLM deployment solution using Ollama and Streamlit. This application allows users to run and interact with powerful large language models locally, ensuring data privacy and offline accessibility with a modern UI.",
     technologies: ["Python", "Streamlit", "Ollama", "Docker", "Pandas"],
@@ -36,10 +18,28 @@ export const legacyProjects = [
     repoLink: "https://github.com/mustafabozkaya/ollama-chat-app"
   },
   {
+    id: 2,
+    title: "Awesome Agent RAG LLMs Apps",
+    shortDescription: "A comprehensive orchestration of multi-agent RAG workflows designed for complex reasoning.",
+    images: ["assets/rag_cover.png", "images/chatbot2.jpg", "images/chatbot3.jpg"],
+    categories: ["python", "langchain", "rag", "agents", "machinelearning"],
+    longDescription: "Developed an advanced Agentic RAG system that uses multi-agent orchestration for complex information retrieval and reasoning. The system integrates multiple LLM providers and specialized agents to handle diverse research tasks with high precision.",
+    technologies: ["Python", "LangChain", "OpenAI", "FAISS", "Docker", "FastAPI"],
+    features: [
+      "Multi-agent task decomposition and execution",
+      "Dynamic prompt engineering and tool selection",
+      "Robust error handling and agent self-correction",
+      "Optimized vector search with hybrid retrieval"
+    ],
+    keyFeatures: ["Agentic RAG", "Multi-Agent Workflows", "Hybrid Search"],
+    results: "Achieved significant improvements in retrieval accuracy and task completion rates for complex queries.",
+    repoLink: "https://github.com/mustafabozkaya/Awesome_Agent_Rag_LMMs_apps"
+  },
+  {
     id: 3,
     title: "ROS2 Based Package & Robots",
     shortDescription: "Modular robotics middleware for advanced SLAM, navigation, and coordination.",
-    images: ["images/ros-robotics.jpg", "images/chatbot2.jpg", "images/chatbot3.jpg"],
+    images: ["assets/ros_cover.png", "images/chatbot2.jpg", "images/chatbot3.jpg"],
     categories: ["robotics", "ros2", "cpp", "python", "slam"],
     longDescription: "Engineered a comprehensive ROS2-based robotics environment, focusing on modular package design for SLAM, autonomous navigation, and multi-robot coordination. The project includes simulations and real-world implementation scripts for cutting-edge robotics research.",
     technologies: ["C++", "Python", "ROS2", "Gazebo", "Rviz", "SLAM", "Navigation ToolBox"],
@@ -57,7 +57,7 @@ export const legacyProjects = [
     id: 4,
     title: "ChatGPT Discord Bot",
     shortDescription: "A scalable, event-driven Discord microservice built in Go for real-time AI interactions.",
-    images: ["images/discord-bot.jpg", "images/chatbot2.jpg", "images/chatbot3.jpg"],
+    images: ["assets/ai_arch_cover.png", "images/chatbot2.jpg", "images/chatbot3.jpg"],
     categories: ["go", "microservice", "discord", "openai"],
     longDescription: "Developed a high-performance Discord bot in Go, integrating OpenAI's GPT models to provide intelligent, real-time responses. The backend is designed as a scalable microservice, emphasizing concurrency and low-latency interaction.",
     technologies: ["Go", "Discordgo", "OpenAI API", "Redis", "Docker", "async/await"],
