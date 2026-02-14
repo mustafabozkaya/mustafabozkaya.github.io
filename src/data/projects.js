@@ -1,4 +1,14 @@
 export const projects = [
+    {
+        id: 'medical-fundus-rag',
+        title: 'Medical Fundus RAG',
+        shortDescription: 'Explainable AI for Eye Disease Diagnosis using Vision RAG and Gemini Pro.',
+        longDescription: 'A SOTA medical assistant that uses Retrieval-Augmented Generation (RAG) for explainable eye disease diagnosis. It leverages Microsoft\'s BiomedCLIP for multimodal feature extraction and Google Gemini Pro for clinical reasoning, providing diagnosis reports backed by similar historical cases.',
+        categories: ['Agentic AI', 'Machine Learning', 'Computer Vision'],
+        technologies: ['Python', 'BiomedCLIP', 'Gemini Pro', 'Qdrant', 'Gradio', 'Docker'],
+        images: ['https://raw.githubusercontent.com/mustafabozkaya/medical-fundus-rag/main/docs/images/gradio_main.png'],
+        repoLink: 'https://github.com/mustafabozkaya/medical-fundus-rag'
+    },
     // --- OLLAMA CHAT APP (PRIORITIZED) ---
     {
         id: 'ollama-chat',
