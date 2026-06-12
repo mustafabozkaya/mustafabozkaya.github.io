@@ -1,14 +1,1711 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mustafabozkaya.github.io</title>
-    <script type="module" crossorigin src="/assets/index-DF3GndAm.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DNRtDdIn.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mustafa Bozkaya — AI Engineer & MLOps Engineer</title>
+  <meta name="description" content="Senior ML Engineer & AI Systems Architect — 25+ AI/ML projects, Agentic AI, Computer Vision, MLOps" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  
+  <style>
+    /* ========== CSS VARIABLES - LIGHT THEME ========== */
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f1f5f9;
+      --bg-card: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-tertiary: #94a3b8;
+      --accent-primary: #0284c7;
+      --accent-secondary: #4f46e5;
+      --accent-gradient: linear-gradient(135deg, #0284c7 0%, #4f46e5 100%);
+      --accent-soft: #e0f2fe;
+      --glass-bg: rgba(255, 255, 255, 0.75);
+      --glass-border: rgba(0, 0, 0, 0.08);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+      --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      --card-hover-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+      --border-subtle: #e2e8f0;
+      --font-main: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --nav-height: 70px;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-main);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; transition: color var(--transition); }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+    ::selection { background: var(--accent-primary); color: #fff; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 4px; }
+
+    /* ========== UTILITY ========== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 100px 0; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-primary);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.2;
+    }
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    /* ========== NAVIGATION ========== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-height);
+      z-index: 1000;
+      background: rgba(248, 250, 252, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      transition: transform var(--transition);
+    }
+    nav.hidden { transform: translateY(-100%); }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent-gradient);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-resume-btn {
+      padding: 8px 20px;
+      background: var(--accent-gradient);
+      color: #fff !important;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: opacity var(--transition), transform var(--transition);
+    }
+    .nav-resume-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .nav-resume-btn::after { display: none !important; }
+
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    .mobile-menu-btn span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* ========== HERO ========== */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding-top: var(--nav-height);
+    }
+    #hero-canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at center, rgba(248,250,252,0.3) 0%, rgba(248,250,252,0.85) 70%);
+      z-index: 2;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      max-width: 800px;
+      padding: 0 24px;
+    }
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: var(--accent-soft);
+      color: var(--accent-primary);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+      border: 1px solid rgba(2, 132, 199, 0.15);
+    }
+    .hero-title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .hero-title .gradient-text {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      padding: 14px 32px;
+      background: var(--accent-gradient);
+      color: #fff;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: opacity var(--transition), transform var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
+    .btn-secondary {
+      padding: 14px 32px;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px solid var(--border-subtle);
+      transition: all var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 48px;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-stat-label {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+      margin-top: 4px;
+    }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-tertiary);
+      font-size: 0.75rem;
+      animation: bounce 2s infinite;
+    }
+    .scroll-indicator .mouse {
+      width: 24px; height: 36px;
+      border: 2px solid var(--text-tertiary);
+      border-radius: 12px;
+      position: relative;
+    }
+    .scroll-indicator .mouse::after {
+      content: '';
+      position: absolute;
+      top: 6px; left: 50%;
+      transform: translateX(-50%);
+      width: 3px; height: 8px;
+      background: var(--accent-primary);
+      border-radius: 2px;
+      animation: scrollDot 2s infinite;
+    }
+    @keyframes scrollDot {
+      0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+      100% { transform: translateX(-50%) translateY(16px); opacity: 0; }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ========== 3D GALLERY SECTION ========== */
+    #gallery-3d {
+      position: relative;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-tertiary);
+      overflow: hidden;
+    }
+    #gallery-3d-canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+    .gallery-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at center, rgba(241,245,249,0.3) 0%, rgba(241,245,249,0.9) 70%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .gallery-text {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      max-width: 600px;
+    }
+
+    /* ========== PROJECTS ========== */
+    #projects { background: var(--bg-primary); }
+    .projects-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .filter-btn {
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      transition: all var(--transition);
+    }
+    .filter-btn:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+    .filter-btn.active {
+      background: var(--accent-gradient);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      transition: all var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--card-hover-shadow);
+      border-color: transparent;
+    }
+    .project-card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: var(--bg-tertiary);
+    }
+    .project-card-image-placeholder {
+      width: 100%;
+      height: 200px;
+      background: var(--accent-gradient);
+      opacity: 0.1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .project-card-body {
+      padding: 20px;
+    }
+    .project-card-categories {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .project-card-category {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: var(--accent-soft);
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .project-card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .project-card-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .project-card-tech {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .project-card-tech-item {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+    }
+    .project-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent-primary);
+    }
+    .project-card-link:hover { text-decoration: underline; }
+
+    /* ========== ABOUT ========== */
+    #about { background: var(--bg-secondary); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .about-text p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    .skills-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-tag {
+      padding: 8px 18px;
+      background: var(--bg-tertiary);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      transition: all var(--transition);
+    }
+    .skill-tag:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      background: var(--accent-soft);
+    }
+
+    /* ========== CONTACT ========== */
+    #contact { background: var(--bg-primary); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .contact-info p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+      transition: all var(--transition);
+      font-weight: 500;
+    }
+    .contact-link:hover {
+      border-color: var(--accent-primary);
+      transform: translateX(4px);
+    }
+    .contact-link-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-primary);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-secondary);
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      transition: border-color var(--transition);
+      outline: none;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--accent-primary);
+    }
+    .contact-form textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+    .contact-form button {
+      padding: 14px 32px;
+      background: var(--accent-gradient);
+      color: #fff;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: opacity var(--transition);
+      align-self: flex-start;
+    }
+    .contact-form button:hover { opacity: 0.9; }
+
+    /* ========== FOOTER ========== */
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-secondary);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-copy {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--accent-primary); }
+
+    /* ========== MODAL ========== */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      max-width: 640px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 32px;
+      position: relative;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.15);
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--bg-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      transition: all var(--transition);
+    }
+    .modal-close:hover { background: var(--accent-soft); color: var(--accent-primary); }
+    .modal-image {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+      background: var(--bg-tertiary);
+    }
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .modal-categories {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .modal-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .modal-tech {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .modal-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      background: var(--accent-gradient);
+      color: #fff;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: opacity var(--transition);
+    }
+    .modal-link:hover { opacity: 0.9; }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: flex; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0; right: 0;
+        background: var(--bg-secondary);
+        border-bottom: 1px solid var(--border-subtle);
+        padding: 20px 24px;
+        gap: 20px;
+        align-items: flex-start;
+      }
+      .hero-stats { gap: 24px; flex-wrap: wrap; }
+      .hero-stat-number { font-size: 1.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+      .section-title { font-size: 2rem; }
+      .modal { padding: 20px; }
+    }
+    @media (max-width: 480px) {
+      .filter-btn { padding: 6px 14px; font-size: 0.8rem; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">M.Bozkaya</a>
+      <div class="nav-links" id="navLinks">
+        <a href="#hero">Home</a>
+        <a href="#gallery-3d">Gallery</a>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="/assets/Mustafa_Bozkaya_CV.pdf" class="nav-resume-btn" target="_blank">📄 Resume</a>
+      </div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">✦ AI Engineer & MLOps Engineer</div>
+      <h1 class="hero-title">
+        Hello, I'm<br>
+        <span class="gradient-text">Mustafa Bozkaya</span>
+      </h1>
+      <p class="hero-subtitle">
+        Building intelligent systems — from autonomous agents and RAG pipelines 
+        to production-grade MLOps infrastructure. 25+ shipped projects across 
+        AI, ML, CV, and full-stack engineering.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          Explore Projects
+        </a>
+        <a href="/assets/Mustafa_Bozkaya_CV.pdf" target="_blank" class="btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Download CV
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-number">25+</div>
+          <div class="hero-stat-label">Projects</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">11</div>
+          <div class="hero-stat-label">Technologies</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-number">4</div>
+          <div class="hero-stat-label">Years Building</div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="mouse"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ===== 3D GALLERY ===== -->
+  <section id="gallery-3d">
+    <canvas id="gallery-3d-canvas"></canvas>
+    <div class="gallery-overlay"></div>
+    <div class="gallery-text">
+      <span class="section-label">Interactive Gallery</span>
+      <h2 class="section-title">3D Project Showcase</h2>
+      <p class="section-subtitle" style="max-width:500px; margin:0 auto;">
+        A living gallery of my work — each card is a project, spinning in 3D space.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="projects-header">
+        <span class="section-label">Portfolio</span>
+        <h2 class="section-title">Project Showcase</h2>
+        <p class="section-subtitle" style="margin:0 auto;">
+          Explore my projects across AI, ML, Computer Vision, Web, Mobile and more.
+        </p>
+      </div>
+      <div class="filter-bar" id="filterBar"></div>
+      <div class="projects-grid" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="section">
+    <div class="container">
+      <div style="text-align:center; margin-bottom: 48px;">
+        <span class="section-label">About</span>
+        <h2 class="section-title">About Me</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm a Senior Machine Learning Engineer and AI Systems Architect with a deep passion for building 
+            intelligent systems that solve real-world problems. My work spans the full stack of modern AI — 
+            from designing autonomous agent architectures and RAG pipelines, to deploying production-grade 
+            computer vision systems and MLOps infrastructure.
+          </p>
+          <p>
+            With a background in both Computer Engineering and Industrial Engineering from İstanbul University, 
+            I bring a unique blend of technical depth and systems thinking to every project. I believe in 
+            building things that work, scale, and make a difference.
+          </p>
+          <p>
+            When I'm not architecting AI systems, you'll find me exploring new technologies, contributing to 
+            open-source, and pushing the boundaries of what's possible with machine learning.
+          </p>
+        </div>
+        <div>
+          <h3 style="margin-bottom:16px; font-size:1.2rem; font-weight:600;">Technical Arsenal</h3>
+          <div class="skills-cloud">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">PyTorch</span>
+            <span class="skill-tag">TensorFlow</span>
+            <span class="skill-tag">LangChain</span>
+            <span class="skill-tag">LangGraph</span>
+            <span class="skill-tag">OpenAI</span>
+            <span class="skill-tag">RAG</span>
+            <span class="skill-tag">Kubernetes</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">Redis</span>
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">GCP</span>
+            <span class="skill-tag">GitHub Actions</span>
+            <span class="skill-tag">Three.js</span>
+            <span class="skill-tag">SwiftUI</span>
+            <span class="skill-tag">ROS2</span>
+            <span class="skill-tag">Computer Vision</span>
+            <span class="skill-tag">MLOps</span>
+            <span class="skill-tag">Streamlit</span>
+            <span class="skill-tag">Gradio</span>
+            <span class="skill-tag">Qdrant</span>
+            <span class="skill-tag">GCP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div style="text-align:center; margin-bottom: 48px;">
+        <span class="section-label">Contact</span>
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-subtitle" style="margin:0 auto;">
+          Have a project in mind or just want to say hello? I'd love to hear from you.
+        </p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p>
+            I'm always open to discussing new projects, creative ideas, 
+            or opportunities to be part of your vision. Feel free to reach out!
+          </p>
+          <div class="contact-links">
+            <a href="mailto:info.mustafa.b@gmail.com" class="contact-link">
+              <div class="contact-link-icon">✉</div>
+              <span>info.mustafa.b@gmail.com</span>
+            </a>
+            <a href="tel:+905455170775" class="contact-link">
+              <div class="contact-link-icon">📞</div>
+              <span>+90 545 517 07 75</span>
+            </a>
+            <a href="https://linkedin.com/in/mustafa-bozkaya" target="_blank" class="contact-link">
+              <div class="contact-link-icon">💼</div>
+              <span>linkedin.com/in/mustafa-bozkaya</span>
+            </a>
+            <a href="https://github.com/mustafabozkaya" target="_blank" class="contact-link">
+              <div class="contact-link-icon">🐙</div>
+              <span>github.com/mustafabozkaya</span>
+            </a>
+            <a href="https://mustafabozkaya.github.io/AI-ML-DL-DS_Projects_Portfolio/" target="_blank" class="contact-link">
+              <div class="contact-link-icon">📂</div>
+              <span>Project Portfolio (Detailed)</span>
+            </a>
+          </div>
+        </div>
+        <form class="contact-form" action="mailto:info.mustafa.b@gmail.com" method="post" enctype="text/plain">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-copy">© 2025-2026 Mustafa Bozkaya. Built with Three.js</div>
+        <div class="footer-links">
+          <a href="https://github.com/mustafabozkaya" target="_blank">GitHub</a>
+          <a href="https://linkedin.com/in/mustafa-bozkaya" target="_blank">LinkedIn</a>
+          <a href="https://mustafabozkaya.github.io/AI-ML-DL-DS_Projects_Portfolio/" target="_blank">Portfolio</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== MODAL ===== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <img class="modal-image" id="modalImage" src="" alt="" />
+      <div class="modal-categories" id="modalCategories"></div>
+      <h3 class="modal-title" id="modalTitle"></h3>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-tech" id="modalTech"></div>
+      <a class="modal-link" id="modalLink" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+        View on GitHub
+      </a>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <script>
+    // ============================================================
+    // PROJECT DATA (extracted from original React app)
+    // ============================================================
+    const PROJECTS = [
+      {
+        "id": "medical-fundus-rag",
+        "title": "Medical Fundus RAG",
+        "shortDescription": "Explainable AI for Eye Disease Diagnosis using Vision RAG and Gemini Pro.",
+        "longDescription": "A SOTA medical assistant that uses Retrieval-Augmented Generation (RAG) for explainable eye disease diagnosis. It leverages Microsoft's BiomedCLIP for multimodal feature extraction and Google Gemini Pro for clinical reasoning, providing diagnosis reports backed by similar historical cases.",
+        "categories": ["Agentic AI", "Machine Learning", "Computer Vision"],
+        "technologies": ["Python", "BiomedCLIP", "Gemini Pro", "Qdrant", "Gradio", "Docker"],
+        "image": "https://raw.githubusercontent.com/mustafabozkaya/medical-fundus-rag/main/docs/images/gradio_main.png",
+        "link": "https://github.com/mustafabozkaya/medical-fundus-rag"
+      },
+      {
+        "id": "ollama-chat",
+        "title": "Ollama Streamlit Chat",
+        "shortDescription": "Desktop-grade UI for local LLM interaction with chat history and model switching.",
+        "longDescription": "Built a private LLM deployment solution using Ollama and Streamlit. Run and interact with powerful large language models locally, ensuring data privacy and offline accessibility with a modern UI.",
+        "categories": ["Web", "Machine Learning"],
+        "technologies": ["Python", "Streamlit", "Ollama", "Docker", "Pandas"],
+        "image": "./assets/ollama_cover.png",
+        "link": "https://github.com/mustafabozkaya/ollama-chat-app"
+      },
+      {
+        "id": "ai-system-architect",
+        "title": "AI System Architect Agent",
+        "shortDescription": "Advanced R1-based agent for designing complex software architectures.",
+        "longDescription": "A sophisticated AI agent using DeepSeek-R1 for automating high-level system design. Generates architecture diagrams, component specifications, and technology stack recommendations based on natural language requirements.",
+        "categories": ["Agentic AI", "Machine Learning"],
+        "technologies": ["DeepSeek-R1", "LangGraph", "Python", "React"],
+        "image": "https://mustafabozkaya.github.io/images/chatbot.jpg",
+        "link": "https://github.com/mustafabozkaya/Awesome_Agent_Rag_LMMs_apps"
+      },
+      {
+        "id": "deep-researcher",
+        "title": "AI Deep Research Agent",
+        "shortDescription": "Autonomous researcher that performs multi-step analysis on any topic.",
+        "longDescription": "An autonomous agent capable of browsing the web, synthesizing information from multiple sources, and producing comprehensive research reports. Perfect for competitor analysis or deep-dives.",
+        "categories": ["Agentic AI", "Web"],
+        "technologies": ["OpenAI", "Tavily", "LangChain", "Python"],
+        "image": "https://mustafabozkaya.github.io/images/chatbot2.jpg",
+        "link": "https://github.com/mustafabozkaya/Awesome_Agent_Rag_LMMs_apps"
+      },
+      {
+        "id": "self-evolving-agent",
+        "title": "AI Self-Evolving Agent",
+        "shortDescription": "Agent that improves its own prompts and strategies based on task outcomes.",
+        "longDescription": "A meta-cognitive AI agent that reflects on its own performance and iteratively improves. Uses feedback loops to refine reasoning strategies and tool-use patterns over time.",
+        "categories": ["Agentic AI", "Deep Learning"],
+        "technologies": ["Claude", "LangGraph", "Python", "Reflection"],
+        "image": "https://mustafabozkaya.github.io/images/chatbot3.jpg",
+        "link": "https://github.com/mustafabozkaya/Awesome_Agent_Rag_LMMs_apps"
+      },
+      {
+        "id": "mcp-multi-tool",
+        "title": "MCP Multi-Tool Suite",
+        "shortDescription": "Model Context Protocol server with integrated tools for enhanced agent capabilities.",
+        "longDescription": "A comprehensive MCP server implementation providing agents with file system access, web search, code execution, and database query tools through a standardized protocol interface.",
+        "categories": ["MCP", "Agentic AI"],
+        "technologies": ["Python", "MCP", "FastAPI", "Docker"],
+        "image": "https://raw.githubusercontent.com/modelcontextprotocol/specification/main/assets/mcp-logo.png",
+        "link": "https://github.com/mustafabozkaya/Awesome_Agent_Rag_LMMs_apps"
+      },
+      {
+        "id": "agentic-rag",
+        "title": "Agentic RAG with Reasoning",
+        "shortDescription": "Advanced RAG system combining vector search with agent-based reasoning loops.",
+        "longDescription": "An Agentic RAG pipeline that combines dense retrieval with multi-hop reasoning. Uses an agent orchestrator to decompose complex queries and synthesize answers from multiple retrieved contexts.",
+        "categories": ["Agentic AI", "Machine Learning"],
+        "technologies": ["Python", "Qdrant", "OpenAI", "LangChain", "Docker"],
+        "image": "./assets/rag_cover.png",
+        "link": "https://github.com/mustafabozkaya/Awesome_Agent_Rag_LMMs_apps"
+      },
+      {
+        "id": "ros2-navigator",
+        "title": "ROS2 Autonomous Navigator",
+        "shortDescription": "Autonomous robot navigation using ROS2 with SLAM and path planning.",
+        "longDescription": "A full ROS2-based autonomous navigation stack with real-time SLAM mapping, adaptive path planning, and obstacle avoidance. Tested on simulated and physical robot platforms.",
+        "categories": ["Robotics", "Computer Vision"],
+        "technologies": ["ROS2", "Python", "C++", "SLAM", "Gazebo"],
+        "image": "./assets/ros_cover.png",
+        "link": "https://github.com/mustafabozkaya/Ros-Based-Package-and-Robots"
+      },
+      {
+        "id": "cv-retail",
+        "title": "Computer Vision for Retail",
+        "shortDescription": "Real-time object detection and tracking for retail analytics and automation.",
+        "longDescription": "A computer vision system for retail environments using YOLO-based detection and DeepSORT tracking. Tracks customer movement, shelf inventory, and generates heatmaps.",
+        "categories": ["Computer Vision", "Deep Learning"],
+        "technologies": ["YOLO", "DeepSORT", "PyTorch", "OpenCV", "Docker"],
+        "image": "https://mustafabozkaya.github.io/images/autonomous-retail.jpg",
+        "link": "https://github.com/mustafabozkaya"
+      },
+      {
+        "id": "drug-discovery",
+        "title": "Generative AI for Drug Discovery",
+        "shortDescription": "Molecular generation and property prediction using deep generative models.",
+        "longDescription": "Uses generative AI models (VAE, GAN, diffusion) to propose novel molecular structures with desired biochemical properties. Includes molecular docking simulation.",
+        "categories": ["Deep Learning", "Machine Learning"],
+        "technologies": ["PyTorch", "RDKit", "Diffusion Models", "Python"],
+        "image": "https://mustafabozkaya.github.io/images/drug-discovery.jpg",
+        "link": "https://github.com/mustafabozkaya/generative-ai-drug-discovery"
+      },
+      {
+        "id": "predictive-maintenance",
+        "title": "Industrial IoT Predictive Maintenance",
+        "shortDescription": "Real-time equipment failure prediction using sensor data and deep learning.",
+        "longDescription": "An end-to-end predictive maintenance system that analyzes IoT sensor data to forecast equipment failures before they occur. Features anomaly detection, remaining useful life estimation, and a real-time dashboard.",
+        "categories": ["IoT", "Deep Learning", "Machine Learning"],
+        "technologies": ["Python", "LSTM", "MQTT", "Grafana", "Docker", "InfluxDB"],
+        "image": "https://mustafabozkaya.github.io/images/predictive-maintenance.jpg",
+        "link": "https://github.com/mustafabozkaya/iiot-predictive-maintenance"
+      },
+      {
+        "id": "quantum-supply-chain",
+        "title": "Quantum-Inspired Supply Chain",
+        "shortDescription": "Quantum annealing and classical hybrid optimization for logistics.",
+        "longDescription": "A hybrid quantum-classical optimization system for supply chain logistics. Uses quantum annealing (D-Wave) for route optimization and classical ML for demand forecasting.",
+        "categories": ["Deep Learning", "Machine Learning"],
+        "technologies": ["Python", "D-Wave", "QUBO", "NumPy", "Pandas"],
+        "image": "https://mustafabozkaya.github.io/images/quantum-supply-chain.jpg",
+        "link": "https://github.com/mustafabozkaya"
+      },
+      {
+        "id": "telemedicine",
+        "title": "AI Telemedicine Platform",
+        "shortDescription": "Full-stack telemedicine platform with AI-powered diagnostic assistance.",
+        "longDescription": "A comprehensive telemedicine platform featuring AI-assisted preliminary diagnosis, symptom analysis, appointment scheduling, and secure video consultations with EMR integration.",
+        "categories": ["Web", "Machine Learning"],
+        "technologies": ["React", "FastAPI", "PostgreSQL", "OpenAI", "Docker", "WebRTC"],
+        "image": "https://mustafabozkaya.github.io/images/telemedicine.jpg",
+        "link": "https://github.com/mustafabozkaya/ai-telemedicine-platform"
+      },
+      {
+        "id": "blockchain-dapp",
+        "title": "Blockchain Supply Chain DApp",
+        "shortDescription": "Decentralized application for transparent supply chain management.",
+        "longDescription": "A blockchain-based supply chain DApp using Ethereum smart contracts. Provides immutable tracking of goods, automated payments via smart contracts, and a React-based dashboard.",
+        "categories": ["Blockchain", "Web"],
+        "technologies": ["Solidity", "React", "Web3.js", "Node.js", "IPFS"],
+        "image": "https://mustafabozkaya.github.io/images/blockchain-dapp.jpg",
+        "link": "https://github.com/mustafabozkaya/blockchain-supply-chain-dapp"
+      },
+      {
+        "id": "social-analytics",
+        "title": "AI Social Media Analytics",
+        "shortDescription": "NLP-powered analytics and sentiment analysis for social media platforms.",
+        "longDescription": "An AI-powered social media analytics platform that performs sentiment analysis, trend detection, and audience segmentation across multiple social platforms using NLP.",
+        "categories": ["Machine Learning", "Web"],
+        "technologies": ["Python", "BERT", "React", "PostgreSQL", "Docker"],
+        "image": "https://mustafabozkaya.github.io/images/social-analytics.jpg",
+        "link": "https://github.com/mustafabozkaya/ai-social-media-analytics"
+      },
+      {
+        "id": "ar-ecommerce",
+        "title": "AR-Enhanced E-commerce",
+        "shortDescription": "Mobile e-commerce app with AR product visualization capabilities.",
+        "longDescription": "A React Native mobile app that leverages ARKit/ARCore for virtual product try-on and 3D visualization. Includes image recognition and product recommendation engine.",
+        "categories": ["Mobile", "Computer Vision"],
+        "technologies": ["React Native", "ARKit", "ARCore", "Python", "Firebase"],
+        "image": "https://mustafabozkaya.github.io/images/ar-ecommerce.jpg",
+        "link": "https://github.com/mustafabozkaya/ar-ecommerce-mobile-app"
+      },
+      {
+        "id": "core-weather",
+        "title": "Core Weather (SwiftUI)",
+        "shortDescription": "Beautiful weather app built with SwiftUI and Core Location.",
+        "longDescription": "A feature-rich iOS weather application built entirely with SwiftUI. Includes animated weather backgrounds, hourly/daily forecasts, location-based updates, and widget support.",
+        "categories": ["Mobile"],
+        "technologies": ["SwiftUI", "Core Location", "WeatherKit", "Xcode"],
+        "image": "https://mustafabozkaya.github.io/images/weather-app.jpg",
+        "link": "https://github.com/mustafabozkaya/ios-weather-app-swiftui"
+      },
+      {
+        "id": "ios-toolkit",
+        "title": "iOS Developer Toolkit",
+        "shortDescription": "Collection of reusable SwiftUI components and developer utilities.",
+        "longDescription": "A comprehensive toolkit for iOS developers featuring reusable SwiftUI components, utility extensions, custom animations, and a component playground for rapid prototyping.",
+        "categories": ["Mobile"],
+        "technologies": ["SwiftUI", "UIKit", "Swift", "Xcode", "CocoaPods"],
+        "image": "https://mustafabozkaya.github.io/images/ios-toolkit.jpg",
+        "link": "https://github.com/mustafabozkaya/ios-developer-toolkit-app"
+      },
+      {
+        "id": "blog-podcast",
+        "title": "AI Blog to Podcast Agent",
+        "shortDescription": "Automatically converts blog posts into professional podcast episodes.",
+        "longDescription": "An AI agent that transforms written blog content into natural-sounding podcast episodes using TTS, content summarization, and multi-voice dialogue generation.",
+        "categories": ["Agentic AI", "Machine Learning"],
+        "technologies": ["Python", "TTS", "OpenAI", "LangChain", "FFmpeg"],
+        "image": "https://mustafabozkaya.github.io/images/blog-podcast.jpg",
+        "link": "https://github.com/mustafabozkaya/Awesome_Agent_Rag_LMMs_apps"
+      },
+      {
+        "id": "meme-generator",
+        "title": "AI Meme Generator (Browser)",
+        "shortDescription": "Browser-based meme generator using AI for caption and template suggestions.",
+        "longDescription": "A client-side meme generator that uses AI to suggest captions and templates. Built entirely for the browser with TensorFlow.js for on-device ML inference.",
+        "categories": ["Web", "Machine Learning"],
+        "technologies": ["JavaScript", "TensorFlow.js", "HTML5 Canvas", "CSS"],
+        "image": "https://mustafabozkaya.github.io/images/meme-generator.jpg",
+        "link": "https://github.com/mustafabozkaya/Awesome_Agent_Rag_LMMs_apps"
+      },
+      {
+        "id": "xai-finance",
+        "title": "xAI Finance Agent",
+        "shortDescription": "AI-powered financial analysis and trading signal agent.",
+        "longDescription": "An AI agent that performs financial market analysis, generates trading signals, and provides portfolio recommendations using technical indicators and sentiment analysis.",
+        "categories": ["Agentic AI", "Machine Learning"],
+        "technologies": ["Python", "XGBoost", "OpenAI", "Pandas", "yfinance"],
+        "image": "https://mustafabozkaya.github.io/images/xai-finance.jpg",
+        "link": "https://github.com/mustafabozkaya/Awesome_Agent_Rag_LMMs_apps"
+      },
+      {
+        "id": "chess-master",
+        "title": "AI Chess Master",
+        "shortDescription": "Chess engine with ML-based move prediction and evaluation.",
+        "longDescription": "A chess AI that combines traditional minimax search with neural network position evaluation. Features multiple difficulty levels and a clean web interface.",
+        "categories": ["Machine Learning", "Web"],
+        "technologies": ["Python", "PyTorch", "Chess.js", "React", "WebSocket"],
+        "image": "https://mustafabozkaya.github.io/images/chess-ai.jpg",
+        "link": "https://github.com/mustafabozkaya/Awesome_Agent_Rag_LMMs_apps"
+      },
+      {
+        "id": "titanic-survival",
+        "title": "Titanic Survival Predictor",
+        "shortDescription": "Classic ML pipeline for survival prediction with EDA and model comparison.",
+        "longDescription": "A complete ML pipeline for the Titanic dataset featuring thorough EDA, feature engineering, model comparison (Logistic Regression, Random Forest, XGBoost), and deployment with Streamlit.",
+        "categories": ["Machine Learning"],
+        "technologies": ["Python", "Scikit-learn", "Pandas", "Streamlit", "Matplotlib"],
+        "image": "https://mustafabozkaya.github.io/images/titanic.jpg",
+        "link": "https://github.com/mustafabozkaya"
+      },
+      {
+        "id": "streamlit-eda",
+        "title": "Streamlit EDA Dashboard",
+        "shortDescription": "Interactive EDA dashboard built with Streamlit for rapid data exploration.",
+        "longDescription": "An interactive Exploratory Data Analysis dashboard built with Streamlit. Upload any CSV and get instant visualizations, statistical summaries, correlation analysis, and feature distributions.",
+        "categories": ["Web", "Machine Learning"],
+        "technologies": ["Python", "Streamlit", "Plotly", "Pandas", "Seaborn"],
+        "image": "./assets/streamlit_eda.jpg",
+        "link": "https://github.com/mustafabozkaya"
+      },
+      {
+        "id": "bert-chatbot",
+        "title": "BERT Customer Service Bot",
+        "shortDescription": "BERT-based customer service chatbot with intent classification and FAQ retrieval.",
+        "longDescription": "A customer service chatbot using fine-tuned BERT for intent classification and a FAQ retrieval system. Features context-aware conversation management and seamless handoff to human agents.",
+        "categories": ["Machine Learning", "Web"],
+        "technologies": ["Python", "BERT", "Transformers", "Flask", "React"],
+        "image": "https://mustafabozkaya.github.io/images/chatbot.jpg",
+        "link": "https://github.com/mustafabozkaya"
+      },
+      {
+        "id": "ecommerce-fullstack",
+        "title": "React E-Commerce Fullstack",
+        "shortDescription": "Full-featured e-commerce platform with React frontend and Node.js backend.",
+        "longDescription": "A production-ready e-commerce platform featuring product management, cart, checkout, payment integration (Stripe), user authentication, and an admin dashboard.",
+        "categories": ["Web"],
+        "technologies": ["React", "Node.js", "MongoDB", "Stripe", "Redux", "Docker"],
+        "image": "https://mustafabozkaya.github.io/images/ecommerce.jpg",
+        "link": "https://github.com/mustafabozkaya"
+      },
+      {
+        "id": "personalized-learning",
+        "title": "AI Personalized Learning",
+        "shortDescription": "Adaptive learning platform using AI to personalize educational content.",
+        "longDescription": "An AI-driven adaptive learning platform that analyzes student performance and learning styles to personalize content delivery, recommend resources, and generate adaptive assessments.",
+        "categories": ["Machine Learning", "Web"],
+        "technologies": ["Python", "React", "PostgreSQL", "OpenAI", "Docker"],
+        "image": "https://mustafabozkaya.github.io/images/learning-platform.jpg",
+        "link": "https://github.com/mustafabozkaya"
+      },
+      {
+        "id": "rn-blueprint",
+        "title": "React Native Blueprint",
+        "shortDescription": "Production-ready React Native starter with best practices and pre-built components.",
+        "longDescription": "A comprehensive React Native starter template featuring navigation, state management, theming, API integration, form validation, and push notifications out of the box.",
+        "categories": ["Mobile"],
+        "technologies": ["React Native", "TypeScript", "Redux", "Firebase", "Expo"],
+        "image": "https://mustafabozkaya.github.io/images/rn-blueprint.jpg",
+        "link": "https://github.com/mustafabozkaya"
+      },
+      {
+        "id": "chatgpt-discord",
+        "title": "ChatGPT Discord Bot",
+        "shortDescription": "Discord bot integrating ChatGPT with multi-channel conversations and memory.",
+        "longDescription": "A Discord bot that brings ChatGPT's conversational capabilities to Discord servers. Features multi-channel conversations, conversation memory, custom personas, and moderation controls.",
+        "categories": ["Web", "Machine Learning"],
+        "technologies": ["Python", "Discord.py", "OpenAI", "Redis", "Docker"],
+        "image": "./assets/ai_arch_cover.png",
+        "link": "https://github.com/mustafabozkaya/chatgpt-discord-bot"
+      }
+    ];
+
+    // ============================================================
+    // THREE.JS — HERO BACKGROUND
+    // ============================================================
+    (function initHero() {
+      const canvas = document.getElementById('hero-canvas');
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Particle system
+      const count = 2000;
+      const positions = new Float32Array(count * 3);
+      const colors = new Float32Array(count * 3);
+      const sizes = new Float32Array(count);
+
+      const color1 = new THREE.Color('#0284c7');
+      const color2 = new THREE.Color('#4f46e5');
+      const color3 = new THREE.Color('#0ea5e9');
+
+      for (let i = 0; i < count; i++) {
+        positions[i*3] = (Math.random() - 0.5) * 30;
+        positions[i*3+1] = (Math.random() - 0.5) * 20;
+        positions[i*3+2] = (Math.random() - 0.5) * 20 - 5;
+
+        const mixed = color1.clone().lerp(color2, Math.random()).lerp(color3, Math.random() * 0.5);
+        colors[i*3] = mixed.r;
+        colors[i*3+1] = mixed.g;
+        colors[i*3+2] = mixed.b;
+
+        sizes[i] = Math.random() * 3 + 1;
+      }
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+      const material = new THREE.PointsMaterial({
+        size: 0.08,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8,
+        sizeAttenuation: true,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const particles = new THREE.Points(geometry, material);
+      scene.add(particles);
+
+      // Connection lines (fiber network effect)
+      const lineGeometry = new THREE.BufferGeometry();
+      const lineCount = 200;
+      const linePositions = new Float32Array(lineCount * 6);
+      const lineColors = new Float32Array(lineCount * 6);
+
+      const verts = [];
+      for (let i = 0; i < 80; i++) {
+        verts.push({
+          x: (Math.random() - 0.5) * 25,
+          y: (Math.random() - 0.5) * 18,
+          z: (Math.random() - 0.5) * 18 - 5
+        });
+      }
+
+      let lineIdx = 0;
+      for (let i = 0; i < lineCount; i++) {
+        const a = Math.floor(Math.random() * verts.length);
+        const b = Math.floor(Math.random() * verts.length);
+        if (a === b) continue;
+        linePositions[lineIdx*6] = verts[a].x;
+        linePositions[lineIdx*6+1] = verts[a].y;
+        linePositions[lineIdx*6+2] = verts[a].z;
+        linePositions[lineIdx*6+3] = verts[b].x;
+        linePositions[lineIdx*6+4] = verts[b].y;
+        linePositions[lineIdx*6+5] = verts[b].z;
+        const alpha = Math.random() * 0.3 + 0.05;
+        lineColors[lineIdx*6] = 0.02;
+        lineColors[lineIdx*6+1] = 0.52;
+        lineColors[lineIdx*6+2] = 0.78;
+        lineColors[lineIdx*6+3] = 0.02;
+        lineColors[lineIdx*6+4] = 0.52;
+        lineColors[lineIdx*6+5] = 0.78;
+        lineIdx++;
+      }
+
+      lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+      lineGeometry.setAttribute('color', new THREE.BufferAttribute(lineColors, 3));
+
+      const lineMaterial = new THREE.LineBasicMaterial({
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.15,
+      });
+      const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
+      scene.add(lines);
+
+      camera.position.z = 8;
+
+      let mouseX = 0, mouseY = 0;
+      document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+        mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        particles.rotation.y += 0.0005;
+        particles.rotation.x += 0.0002;
+        lines.rotation.y = particles.rotation.y;
+        lines.rotation.x = particles.rotation.x;
+
+        // Subtle mouse parallax
+        particles.rotation.y += (mouseX * 0.05 - particles.rotation.y) * 0.01;
+        particles.rotation.x += (mouseY * 0.03 - particles.rotation.x) * 0.01;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    })();
+
+    // ============================================================
+    // THREE.JS — 3D GALLERY (Rotating Project Cards)
+    // ============================================================
+    (function initGallery() {
+      const canvas = document.getElementById('gallery-3d-canvas');
+      const section = document.getElementById('gallery-3d');
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, section.clientWidth / section.clientHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(section.clientWidth, section.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Create 3D card meshes
+      const cards = [];
+      const cardData = PROJECTS.slice(0, 12); // Show 12 in 3D
+      const radius = 4.5;
+      const colors = [0x0284c7, 0x4f46e5, 0x0ea5e9, 0x7c3aed, 0x06b6d4, 0x6366f1];
+
+      cardData.forEach((project, i) => {
+        const geometry = new THREE.PlaneGeometry(2, 1.2);
+        const color = colors[i % colors.length];
+        const material = new THREE.MeshBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 0.25,
+          side: THREE.DoubleSide,
+        });
+        const card = new THREE.Mesh(geometry, material);
+
+        const angle = (i / cardData.length) * Math.PI * 2;
+        card.position.x = Math.cos(angle) * radius;
+        card.position.z = Math.sin(angle) * radius;
+        card.position.y = Math.sin(angle * 1.5) * 0.5;
+        card.lookAt(0, 0, 0);
+
+        scene.add(card);
+        cards.push({ mesh: card, angle: angle, baseY: card.position.y });
+
+        // Add a small label plane for each card
+        const labelGeo = new THREE.PlaneGeometry(1.6, 0.24);
+        const labelCanvas = document.createElement('canvas');
+        labelCanvas.width = 320;
+        labelCanvas.height = 48;
+        const ctx = labelCanvas.getContext('2d');
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+        ctx.beginPath();
+        ctx.roundRect(0, 0, 320, 48, 8);
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 16px "Space Grotesk", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(project.title.length > 22 ? project.title.slice(0, 20) + '…' : project.title, 160, 24);
+
+        const labelTexture = new THREE.CanvasTexture(labelCanvas);
+        const labelMat = new THREE.MeshBasicMaterial({
+          map: labelTexture,
+          transparent: true,
+          side: THREE.DoubleSide,
+          depthWrite: false,
+        });
+        const label = new THREE.Mesh(labelGeo, labelMat);
+        label.position.copy(card.position);
+        label.position.y -= 0.85;
+        label.lookAt(0, 0, 0);
+        scene.add(label);
+        cards[cards.length-1].label = label;
+      });
+
+      // Add floating particles around
+      const pCount = 500;
+      const pPos = new Float32Array(pCount * 3);
+      for (let i = 0; i < pCount; i++) {
+        const r = 3 + Math.random() * 3;
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.random() * Math.PI * 2;
+        pPos[i*3] = Math.sin(theta) * Math.cos(phi) * r;
+        pPos[i*3+1] = Math.sin(theta) * Math.sin(phi) * r;
+        pPos[i*3+2] = Math.cos(theta) * r;
+      }
+      const pGeo = new THREE.BufferGeometry();
+      pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+      const pMat = new THREE.PointsMaterial({
+        size: 0.04,
+        color: 0x0284c7,
+        transparent: true,
+        opacity: 0.3,
+        blending: THREE.AdditiveBlending,
+      });
+      const particles = new THREE.Points(pGeo, pMat);
+      scene.add(particles);
+
+      camera.position.z = 7;
+
+      let mouseX = 0, mouseY = 0;
+      section.addEventListener('mousemove', (e) => {
+        const rect = section.getBoundingClientRect();
+        mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        mouseY = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      });
+
+      let autoRotate = true;
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        if (autoRotate) {
+          cards.forEach((c, i) => {
+            c.angle += 0.003;
+            const speed = 1 + Math.sin(i) * 0.3;
+            const a = c.angle * speed;
+            c.mesh.position.x = Math.cos(a) * radius;
+            c.mesh.position.z = Math.sin(a) * radius;
+            c.mesh.position.y = Math.sin(a * 1.5) * 0.5;
+            c.mesh.lookAt(0, 0, 0);
+            if (c.label) {
+              c.label.position.copy(c.mesh.position);
+              c.label.position.y -= 0.85;
+              c.label.lookAt(0, 0, 0);
+            }
+          });
+        }
+
+        // Subtle mouse parallax on the group
+        particles.rotation.y += 0.002;
+        particles.rotation.x += 0.001;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      // Pause auto-rotate on hover
+      section.addEventListener('mouseenter', () => { autoRotate = false; });
+      section.addEventListener('mouseleave', () => { autoRotate = true; });
+
+      function resizeGallery() {
+        const w = section.clientWidth;
+        const h = section.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      }
+      window.addEventListener('resize', resizeGallery);
+    })();
+
+    // ============================================================
+    // GSAP — SCROLL ANIMATIONS
+    // ============================================================
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Fade in sections
+    gsap.utils.toArray('.section').forEach((section) => {
+      gsap.from(section.querySelector('.section-title'), {
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+      });
+      gsap.from(section.querySelector('.section-subtitle'), {
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 75%',
+          toggleActions: 'play none none none',
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.2,
+        ease: 'power3.out',
+      });
+    });
+
+    // Navbar hide/show on scroll
+    let lastScroll = 0;
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll > 200) {
+        navbar.classList.toggle('hidden', currentScroll > lastScroll && currentScroll > 400);
+      } else {
+        navbar.classList.remove('hidden');
+      }
+      lastScroll = currentScroll;
+    });
+
+    // ============================================================
+    // PROJECTS — RENDER GRID
+    // ============================================================
+    const projectsGrid = document.getElementById('projectsGrid');
+    const filterBar = document.getElementById('filterBar');
+
+    // Get unique categories
+    const allCats = [...new Set(PROJECTS.flatMap(p => p.categories))].sort();
+    let activeFilter = 'All';
+
+    function renderFilters() {
+      filterBar.innerHTML = '<button class="filter-btn active" data-cat="All">All</button>';
+      allCats.forEach(cat => {
+        filterBar.innerHTML += `<button class="filter-btn" data-cat="${cat}">${cat}</button>`;
+      });
+      filterBar.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBar.querySelector('.active').classList.remove('active');
+          btn.classList.add('active');
+          activeFilter = btn.dataset.cat;
+          renderProjects();
+        });
+      });
+    }
+
+    function renderProjects() {
+      const filtered = activeFilter === 'All'
+        ? PROJECTS
+        : PROJECTS.filter(p => p.categories.includes(activeFilter));
+
+      projectsGrid.innerHTML = filtered.map((p, idx) => `
+        <div class="project-card" data-idx="${idx}" data-project='${JSON.stringify(p).replace(/'/g, "&#39;")}'>
+          <img class="project-card-image" src="${p.image}" alt="${p.title}" 
+               onerror="this.parentNode.innerHTML='<div class=project-card-image-placeholder></div>'" 
+               loading="lazy" />
+          <div class="project-card-body">
+            <div class="project-card-categories">
+              ${p.categories.map(c => `<span class="project-card-category">${c}</span>`).join('')}
+            </div>
+            <h3 class="project-card-title">${p.title}</h3>
+            <p class="project-card-desc">${p.shortDescription}</p>
+            <div class="project-card-tech">
+              ${p.technologies.map(t => `<span class="project-card-tech-item">${t}</span>`).join('')}
+            </div>
+            <a href="${p.link}" target="_blank" class="project-card-link" onclick="event.stopPropagation()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+              View on GitHub
+            </a>
+          </div>
+        </div>
+      `).join('');
+
+      // Card click -> modal
+      projectsGrid.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const p = PROJECTS[parseInt(card.dataset.idx)];
+          openModal(p);
+        });
+      });
+
+      // Animate cards
+      gsap.from('.project-card', {
+        scrollTrigger: { trigger: '#projectsGrid', start: 'top 85%' },
+        y: 30,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.05,
+        ease: 'power2.out',
+      });
+    }
+
+    // ============================================================
+    // MODAL
+    // ============================================================
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalImage = document.getElementById('modalImage');
+    const modalCategories = document.getElementById('modalCategories');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalTech = document.getElementById('modalTech');
+    const modalLink = document.getElementById('modalLink');
+    const modalClose = document.getElementById('modalClose');
+
+    function openModal(p) {
+      modalImage.src = p.image;
+      modalImage.alt = p.title;
+      modalImage.onerror = () => { modalImage.style.display = 'none'; };
+      modalImage.onload = () => { modalImage.style.display = 'block'; };
+      modalCategories.innerHTML = p.categories.map(c => `<span class="project-card-category">${c}</span>`).join('');
+      modalTitle.textContent = p.title;
+      modalDesc.textContent = p.longDescription;
+      modalTech.innerHTML = p.technologies.map(t => `<span class="project-card-tech-item">${t}</span>`).join('');
+      modalLink.href = p.link;
+      modalOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // ============================================================
+    // MOBILE MENU
+    // ============================================================
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    renderFilters();
+    renderProjects();
+  </script>
+</body>
 </html>
