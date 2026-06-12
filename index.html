@@ -394,18 +394,27 @@
       box-shadow: var(--card-hover-shadow);
       border-color: transparent;
     }
+    .project-card-image-wrap {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      background: var(--bg-tertiary);
+    }
     .project-card-image {
       width: 100%;
       height: 200px;
       object-fit: cover;
-      background: var(--bg-tertiary);
     }
     .project-card-image-placeholder {
-      width: 100%;
-      height: 200px;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: var(--accent-gradient);
-      opacity: 0.1;
-      display: flex; align-items: center; justify-content: center;
+      opacity: 0.08;
+      display: none;
+      align-items: center;
+      justify-content: center;
     }
     .project-card-body {
       padding: 20px;
@@ -947,7 +956,12 @@
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
       <button class="modal-close" id="modalClose">✕</button>
-      <img class="modal-image" id="modalImage" src="" alt="" />
+      <div class="modal-image-wrap" style="position:relative;">
+        <img class="modal-image" id="modalImage" src="" alt="" />
+        <div class="modal-image-placeholder" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; background:var(--accent-gradient); opacity:0.08; align-items:center; justify-content:center; border-radius:var(--radius-sm);">
+          <span style="font-size:3rem;opacity:0.3;">📁</span>
+        </div>
+      </div>
       <div class="modal-categories" id="modalCategories"></div>
       <h3 class="modal-title" id="modalTitle"></h3>
       <p class="modal-desc" id="modalDesc"></p>
@@ -1435,7 +1449,12 @@
         const ctx = labelCanvas.getContext('2d');
         ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
         ctx.beginPath();
-        ctx.roundRect(0, 0, 320, 48, 8);
+        // roundRect fallback for older browsers
+        if (ctx.roundRect) {
+          ctx.roundRect(0, 0, 320, 48, 8);
+        } else {
+          ctx.rect(0, 0, 320, 48);
+        }
         ctx.fill();
         ctx.fillStyle = '#ffffff';
         ctx.font = 'bold 16px "Space Grotesk", sans-serif';
@@ -1609,11 +1628,16 @@
         ? PROJECTS
         : PROJECTS.filter(p => p.categories.includes(activeFilter));
 
-      projectsGrid.innerHTML = filtered.map((p, idx) => `
-        <div class="project-card" data-idx="${idx}" data-project='${JSON.stringify(p).replace(/'/g, "&#39;")}'>
-          <img class="project-card-image" src="${p.image}" alt="${p.title}" 
-               onerror="this.parentNode.innerHTML='<div class=project-card-image-placeholder></div>'" 
-               loading="lazy" />
+      projectsGrid.innerHTML = filtered.map((p) => `
+        <div class="project-card" data-id="${p.id}">
+          <div class="project-card-image-wrap">
+            <img class="project-card-image" src="${p.image}" alt="${p.title}" 
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
+                 loading="lazy" />
+            <div class="project-card-image-placeholder" style="display:none;">
+              <span style="font-size:2rem;opacity:0.3;">📁</span>
+            </div>
+          </div>
           <div class="project-card-body">
             <div class="project-card-categories">
               ${p.categories.map(c => `<span class="project-card-category">${c}</span>`).join('')}
@@ -1634,8 +1658,9 @@
       // Card click -> modal
       projectsGrid.querySelectorAll('.project-card').forEach(card => {
         card.addEventListener('click', () => {
-          const p = PROJECTS[parseInt(card.dataset.idx)];
-          openModal(p);
+          const id = card.dataset.id;
+          const p = PROJECTS.find(pr => pr.id === id);
+          if (p) openModal(p);
         });
       });
 
@@ -1665,8 +1690,9 @@
     function openModal(p) {
       modalImage.src = p.image;
       modalImage.alt = p.title;
-      modalImage.onerror = () => { modalImage.style.display = 'none'; };
-      modalImage.onload = () => { modalImage.style.display = 'block'; };
+      modalImage.style.display = 'block';
+      modalImage.onerror = () => { modalImage.style.display = 'none'; modalImage.nextElementSibling.style.display = 'flex'; };
+      modalImage.onload = () => { modalImage.style.display = 'block'; if (modalImage.nextElementSibling) modalImage.nextElementSibling.style.display = 'none'; };
       modalCategories.innerHTML = p.categories.map(c => `<span class="project-card-category">${c}</span>`).join('');
       modalTitle.textContent = p.title;
       modalDesc.textContent = p.longDescription;
