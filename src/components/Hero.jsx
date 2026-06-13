@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FiDownload, FiExternalLink } from 'react-icons/fi';
+import { FiExternalLink } from 'react-icons/fi';
 import { useEffect, useRef } from 'react';
 
 const Hero = () => {
@@ -179,9 +179,6 @@ const Hero = () => {
             <a href="/AI-ML-DL-DS_Projects_Portfolio/" target="_blank" rel="noopener noreferrer" className="btn btn-portfolio">
               <FiExternalLink style={{ marginRight: '8px' }} /> Portfolio
             </a>
-            <a href="/assets/Mustafa_Bozkaya_CV.pdf" download="Mustafa_Bozkaya_CV.pdf" className="btn btn-cv">
-              <FiDownload style={{ marginRight: '8px' }} /> Download CV
-            </a>
             <a href="#about" className="btn btn-outline">Technical Background</a>
           </motion.div>
 
@@ -332,45 +329,6 @@ const Hero = () => {
           box-shadow: 0 8px 25px rgba(129, 140, 248, 0.3);
         }
 
-        .btn-cv {
-          background: rgba(255, 255, 255, 0.03);
-          color: var(--text-primary);
-          border: 1px solid var(--glass-border);
-          backdrop-filter: blur(12px);
-          position: relative;
-          overflow: hidden;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .btn-cv::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.08),
-            transparent
-          );
-          transition: 0.6s;
-        }
-
-        .btn-cv:hover::before {
-          left: 100%;
-        }
-
-        .btn-cv:hover {
-          background: rgba(255, 255, 255, 0.08);
-          border-color: var(--accent-primary);
-          transform: translateY(-5px);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4),
-                      0 0 20px rgba(56, 189, 248, 0.2);
-        }
-
-        /* Terminal Micro-component */
         .terminal-preview {
           background: rgba(15, 23, 42, 0.8);
           backdrop-filter: blur(10px);
