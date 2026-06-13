@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FiDownload } from 'react-icons/fi';
+import { FiDownload, FiExternalLink } from 'react-icons/fi';
 import { useEffect, useRef } from 'react';
 
 const Hero = () => {
@@ -176,6 +176,9 @@ const Hero = () => {
 
           <motion.div variants={itemVariants} className="hero-actions">
             <a href="#projects" className="btn btn-primary">Discover Projects</a>
+            <a href="/AI-ML-DL-DS_Projects_Portfolio/" target="_blank" rel="noopener noreferrer" className="btn btn-portfolio">
+              <FiExternalLink style={{ marginRight: '8px' }} /> Portfolio
+            </a>
             <a href="/assets/Mustafa_Bozkaya_CV.pdf" download="Mustafa_Bozkaya_CV.pdf" className="btn btn-cv">
               <FiDownload style={{ marginRight: '8px' }} /> Download CV
             </a>
@@ -312,6 +315,21 @@ const Hero = () => {
           background: var(--accent-primary);
           color: white;
           transform: translateY(-3px);
+        }
+
+        .btn-portfolio {
+          background: rgba(129, 140, 248, 0.08);
+          color: var(--accent-secondary);
+          border: 1px solid rgba(129, 140, 248, 0.25);
+          backdrop-filter: blur(12px);
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-portfolio:hover {
+          background: rgba(129, 140, 248, 0.15);
+          border-color: var(--accent-secondary);
+          transform: translateY(-3px);
+          box-shadow: 0 8px 25px rgba(129, 140, 248, 0.3);
         }
 
         .btn-cv {
