@@ -1,318 +1,269 @@
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { FiDownload } from 'react-icons/fi';
+import { FiDownload, FiArrowDown } from 'react-icons/fi';
 
 const Hero = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
+  const canvasRef = useRef(null);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
+  // Lightweight particle canvas
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let animId;
+    const particles = [];
+    const NUM = 60;
+    const DIST = 130;
+    let mouseX = 0, mouseY = 0;
+
+    const resize = () => {
+      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    };
+
+    const init = () => {
+      particles.length = 0;
+      for (let i = 0; i < NUM; i++) {
+        particles.push({
+          x: Math.random() * canvas.offsetWidth,
+          y: Math.random() * canvas.offsetHeight,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          size: Math.random() * 2 + 0.8,
+        });
+      }
+    };
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+      const w = canvas.offsetWidth, h = canvas.offsetHeight;
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx + (mouseX - w / 2) * 0.00008;
+        p.y += p.vy + (mouseY - h / 2) * 0.00008;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(99, 102, 241, 0.25)';
+        ctx.fill();
+      }
+
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < DIST) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(99, 102, 241, ${(1 - dist / DIST) * 0.08})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      animId = requestAnimationFrame(draw);
+    };
+
+    const onMouse = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+    };
+
+    resize();
+    init();
+    draw();
+    window.addEventListener('resize', () => { resize(); init(); });
+    canvas.addEventListener('mousemove', onMouse);
+
+    // Reduced motion: stop animation
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq.matches) cancelAnimationFrame(animId);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('resize', resize);
+      canvas.removeEventListener('mousemove', onMouse);
+    };
+  }, []);
+
+  const container = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } },
+  };
+  const item = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
   };
 
   return (
-    <section id="hero" className="hero-section">
-      {/* Ambient Motion Background */}
-      <div className="bg-ambient">
-        {[...Array(20)].map((_, i) => (
-          <div key={i} className="particle" />
-        ))}
+    <section id="hero" className="hero-section" aria-label="Hero">
+      {/* Particle canvas */}
+      <canvas ref={canvasRef} className="hero-canvas" aria-hidden="true" />
+
+      {/* Ambient orbs */}
+      <div className="hero-orbs" aria-hidden="true">
+        <div className="hero-orb hero-orb-1" />
+        <div className="hero-orb hero-orb-2" />
+        <div className="hero-orb hero-orb-3" />
       </div>
 
       <div className="container hero-content">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.h2 variants={itemVariants} className="greeting">
-            Hello, I'm
-          </motion.h2>
-          <motion.h1 variants={itemVariants} className="name">
-            Mustafa Bozkaya
-          </motion.h1>
-          <motion.h3 variants={itemVariants} className="title">
-            Senior Machine Learning Engineer <span className="separator">|</span> AI Systems Architect
-          </motion.h3>
-          <motion.p variants={itemVariants} className="subtitle">
-            Bridging the gap between cutting-edge AI research and scalable production systems.
-            Specializing in **Multi-Agent Architectures**, **VLA Models**, and **Production MLOps**.
-          </motion.p>
-
-          <motion.div variants={itemVariants} className="hero-actions">
-            <a href="#projects" className="btn btn-primary">Discover Projects</a>
-            <a href="/assets/Mustafa_Bozkaya_CV.pdf" download="Mustafa_Bozkaya_CV.pdf" className="btn btn-cv">
-              <FiDownload style={{ marginRight: '8px' }} /> Download CV
-            </a>
-            <a href="#about" className="btn btn-outline">Technical Background</a>
+        <motion.div variants={container} initial="hidden" animate="visible">
+          <motion.div variants={item} className="hero-badge">
+            <span className="badge-dot" /> Available for work
           </motion.div>
 
-          <motion.div variants={itemVariants} className="terminal-preview">
-            <div className="terminal-header">
-              <span className="dot red"></span>
-              <span className="dot yellow"></span>
-              <span className="dot green"></span>
-              <span className="terminal-title">mustafa_bozkaya — ai_status</span>
-            </div>
-            <div className="terminal-body">
-              <p><span className="prompt">❯</span> system.status <span className="value">"active"</span></p>
-              <p><span className="prompt">❯</span> current.focus <span className="value">["Agentic RAG", "LLM Serving", "ROS2"]</span></p>
-              <p><span className="prompt">❯</span> expertise.level <span className="value">"Senior"</span></p>
-              <p><span className="prompt">❯</span> <span className="cursor">_</span></p>
-            </div>
+          <motion.h1 variants={item} className="hero-title">
+            <span className="line">AI Engineer &</span>
+            <span className="line highlight">MLOps Engineer</span>
+            <span className="line">Based in Turkey</span>
+          </motion.h1>
+
+          <motion.p variants={item} className="hero-desc">
+            Building intelligent systems at the intersection of machine learning, cloud infrastructure, and generative AI.
+            <strong> 27+ certifications.</strong> Production-grade solutions.
+          </motion.p>
+
+          <motion.div variants={item} className="hero-actions">
+            <a href="#projects" className="btn btn-primary">View Projects <span className="btn-arrow">→</span></a>
+            <a href="/assets/Mustafa_Bozkaya_CV.pdf" download className="btn btn-secondary">
+              <FiDownload /> Download CV
+            </a>
+          </motion.div>
+
+          <motion.div variants={item} className="hero-stats">
+            <div className="stat"><span className="stat-num">29+</span><span className="stat-label">Projects</span></div>
+            <div className="stat"><span className="stat-num">27+</span><span className="stat-label">Certifications</span></div>
+            <div className="stat"><span className="stat-num">5+</span><span className="stat-label">Years Exp.</span></div>
           </motion.div>
         </motion.div>
       </div>
 
+      <a href="#projects" className="scroll-indicator" aria-label="Scroll down">
+        <FiArrowDown />
+      </a>
+
       <style>{`
         .hero-section {
           min-height: 100vh;
-          display: flex;
-          align-items: center;
-          padding-top: 80px;
-          position: relative;
-          overflow: hidden;
-          background: var(--bg-primary);
+          display: flex; align-items: center; justify-content: center;
+          padding-top: 72px; position: relative; overflow: hidden;
+          background: linear-gradient(160deg, #fafbfc 0%, #f0f2ff 40%, #fafbfc 100%);
         }
-
-        /* Ambient Particles */
-        .bg-ambient {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          z-index: 1;
+        .hero-canvas {
+          position: absolute; inset: 0; z-index: 1; pointer-events: auto;
         }
-
-        .particle {
-          position: absolute;
-          width: 4px;
-          height: 4px;
-          background: var(--accent-primary);
-          border-radius: 50%;
-          opacity: 0.15;
-          filter: blur(1px);
-          animation: float 20s infinite linear;
+        .hero-orbs { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+        .hero-orb {
+          position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4;
+          animation: orbFloat 20s ease-in-out infinite;
         }
-
-        ${[...Array(20)].map((_, i) => `
-          .particle:nth-child(${i + 1}) {
-            left: ${Math.random() * 100}%;
-            top: ${Math.random() * 100}%;
-            animation-delay: ${Math.random() * -20}s;
-            animation-duration: ${15 + Math.random() * 10}s;
-            transform: scale(${0.5 + Math.random()});
-          }
-        `).join('')}
-
-        @keyframes float {
-          0% { transform: translateY(0) translateX(0); }
-          25% { transform: translateY(-20px) translateX(10px); }
-          50% { transform: translateY(-40px) translateX(0); }
-          75% { transform: translateY(-20px) translateX(-10px); }
-          100% { transform: translateY(0) translateX(0); }
+        .hero-orb-1 { width: 500px; height: 500px; background: rgba(99,102,241,0.2); top: -150px; right: -100px; }
+        .hero-orb-2 { width: 400px; height: 400px; background: rgba(139,92,246,0.15); bottom: -100px; left: -80px; animation-delay: -7s; }
+        .hero-orb-3 { width: 350px; height: 350px; background: rgba(6,182,212,0.12); top: 50%; left: 50%; animation-delay: -14s; }
+        @keyframes orbFloat {
+          0%,100% { transform: translate(0,0) scale(1); }
+          25% { transform: translate(30px,-40px) scale(1.05); }
+          50% { transform: translate(-20px,20px) scale(0.95); }
+          75% { transform: translate(40px,30px) scale(1.02); }
         }
-        
         .hero-content {
-          position: relative;
-          z-index: 10;
-          max-width: 900px;
+          position: relative; z-index: 10; text-align: center; max-width: 800px; padding: 0 24px;
         }
-        
-        .greeting {
-          color: var(--accent-primary);
-          font-family: var(--font-code);
-          font-size: 1.2rem;
-          margin-bottom: var(--spacing-xs);
+        .hero-badge {
+          display: inline-flex; align-items: center; gap: 8px;
+          padding: 8px 20px 8px 12px;
+          background: var(--bg-secondary);
+          border: 1px solid var(--glass-border);
+          border-radius: 100px;
+          font-size: 0.8125rem; color: var(--text-secondary);
+          margin-bottom: 32px; box-shadow: var(--card-shadow);
         }
-        
-        .name {
-          font-size: clamp(3rem, 8vw, 5rem);
-          font-weight: 800;
-          color: var(--text-primary);
-          line-height: 1.1;
-          margin-bottom: var(--spacing-sm);
-          letter-spacing: -1px;
-        }
-        
-        .title {
-          font-size: clamp(1.2rem, 4vw, 2rem);
-          color: var(--text-secondary);
-          margin-bottom: var(--spacing-md);
-          font-weight: 500;
-        }
+        .badge-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
 
-        .separator {
-          color: var(--accent-primary);
-          opacity: 0.5;
-          margin: 0 10px;
+        .hero-title {
+          font-family: var(--font-display);
+          font-size: clamp(2.5rem, 7vw, 4.5rem);
+          font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+          margin-bottom: 24px;
         }
-        
-        .subtitle {
-          font-size: 1.2rem;
-          color: var(--text-secondary);
-          max-width: 700px;
-          margin-bottom: var(--spacing-lg);
-          line-height: 1.7;
-        }
-
-        .subtitle b, .subtitle strong {
-          color: var(--text-primary);
-        }
-        
-        .hero-actions {
-          display: flex;
-          gap: var(--spacing-md);
-          margin-bottom: var(--spacing-lg);
-        }
-        
-        .btn {
-          padding: 1rem 2.5rem;
-          border-radius: 12px;
-          font-weight: 700;
-          transition: all var(--transition-normal);
-          text-transform: uppercase;
-          font-size: 0.85rem;
-          letter-spacing: 1.5px;
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-        }
-        
-        .btn-primary {
+        .hero-title .line { display: block; }
+        .hero-title .highlight {
           background: var(--accent-gradient);
-          color: white;
-          box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+          -webkit-background-clip: text; background-clip: text; color: transparent;
         }
-        
+        .hero-desc {
+          font-size: clamp(1rem, 2vw, 1.125rem);
+          color: var(--text-secondary); max-width: 560px;
+          margin: 0 auto 36px; line-height: 1.7;
+        }
+        .hero-desc strong { color: var(--text-primary); }
+
+        .hero-actions {
+          display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 48px;
+        }
+        .btn {
+          display: inline-flex; align-items: center; gap: 8px;
+          padding: 14px 28px; border-radius: 12px;
+          font-weight: 600; font-size: 0.9375rem;
+          transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+        .btn-primary {
+          background: var(--text-primary); color: var(--bg-primary);
+        }
         .btn-primary:hover {
           transform: translateY(-3px);
-          box-shadow: 0 8px 25px rgba(56, 189, 248, 0.6);
+          box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+          background: var(--accent-primary); color: #fff;
         }
-        
-        .btn-outline {
-          border: 2px solid var(--accent-primary);
-          color: var(--accent-primary);
-        }
-        
-        .btn-outline:hover {
-          background: var(--accent-primary);
-          color: white;
-          transform: translateY(-3px);
-        }
-
-        .btn-cv {
-          background: rgba(255, 255, 255, 0.03);
-          color: var(--text-primary);
+        .btn-secondary {
+          background: var(--bg-secondary); color: var(--text-primary);
           border: 1px solid var(--glass-border);
-          backdrop-filter: blur(12px);
-          position: relative;
-          overflow: hidden;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .btn-cv::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.08),
-            transparent
-          );
-          transition: 0.6s;
-        }
-
-        .btn-cv:hover::before {
-          left: 100%;
-        }
-
-        .btn-cv:hover {
-          background: rgba(255, 255, 255, 0.08);
-          border-color: var(--accent-primary);
-          transform: translateY(-5px);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 
-                      0 0 20px rgba(56, 189, 248, 0.2);
-        }
-
-        /* Terminal Micro-component */
-        .terminal-preview {
-          background: rgba(15, 23, 42, 0.8);
           backdrop-filter: blur(10px);
-          border: 1px solid var(--glass-border);
-          border-radius: 12px;
-          box-shadow: var(--glass-shadow);
-          max-width: 500px;
-          overflow: hidden;
-          font-family: var(--font-code);
-          margin-top: calc(var(--spacing-lg) * 0.5);
+        }
+        .btn-secondary:hover {
+          transform: translateY(-3px);
+          box-shadow: var(--card-shadow);
+          border-color: var(--accent-primary);
         }
 
-        .terminal-header {
-          background: rgba(255, 255, 255, 0.05);
-          padding: 8px 15px;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        .hero-stats {
+          display: flex; justify-content: center; gap: 48px;
+        }
+        .stat { text-align: center; }
+        .stat-num {
+          display: block; font-family: var(--font-display);
+          font-size: 1.75rem; font-weight: 800;
+          background: var(--accent-gradient);
+          -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .stat-label { font-size: 0.8125rem; color: var(--text-secondary); margin-top: 4px; }
+
+        .scroll-indicator {
+          position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+          z-index: 10; color: var(--text-secondary); font-size: 1.5rem;
+          animation: bounce 2s ease-in-out infinite;
+          transition: color var(--transition-fast);
+        }
+        .scroll-indicator:hover { color: var(--accent-primary); }
+        @keyframes bounce {
+          0%,100% { transform: translateX(-50%) translateY(0); }
+          50% { transform: translateX(-50%) translateY(8px); }
         }
 
-        .dot {
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-        }
-        .red { background: #ff5f56; }
-        .yellow { background: #ffbd2e; }
-        .green { background: #27c93f; }
-
-        .terminal-title {
-          font-size: 0.75rem;
-          color: rgba(255, 255, 255, 0.4);
-          margin-left: auto;
-        }
-
-        .terminal-body {
-          padding: 20px;
-          font-size: 0.9rem;
-          color: #f8fafc;
-        }
-
-        .prompt { color: var(--accent-primary); margin-right: 10px; }
-        .value { color: #818cf8; }
-        .cursor {
-          display: inline-block;
-          width: 8px;
-          height: 1.2rem;
-          background: var(--accent-primary);
-          margin-left: 5px;
-          animation: blink 1s infinite;
-          vertical-align: middle;
-        }
-
-        @keyframes blink {
-          50% { opacity: 0; }
-        }
-        
         @media (max-width: 768px) {
-          .hero-actions { flex-direction: column; width: 100%; }
-          .btn { width: 100%; justify-content: center; }
-          .terminal-preview { display: none; }
+          .hero-title { font-size: 2.2rem; }
+          .hero-actions { flex-direction: column; }
+          .btn { justify-content: center; }
+          .hero-stats { gap: 24px; }
         }
       `}</style>
     </section>
