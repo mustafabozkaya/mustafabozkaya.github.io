@@ -295,7 +295,7 @@ const Projects = () => {
 
         .mega-status {
           color: var(--text-secondary);
-          font-family: 'Space Mono', monospace;
+          font-family: var(--font-code);
           background: rgba(56, 189, 248, 0.1);
           display: inline-block;
           padding: 0.4rem 1rem;

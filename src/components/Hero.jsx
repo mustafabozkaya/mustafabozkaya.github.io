@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
 import { FiDownload } from 'react-icons/fi';
+import { useEffect, useRef } from 'react';
 
 const Hero = () => {
+  const canvasRef = useRef(null);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -18,18 +21,138 @@ const Hero = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" },
+      transition: { duration: 0.8, ease: 'easeOut' },
     },
   };
 
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    // Check reduced motion
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    const ctx = canvas.getContext('2d');
+    let animationId;
+    let mouseX = 0, mouseY = 0;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const getThemeColor = (lightVar, darkVar) => {
+      const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+      return theme === 'light' ? lightVar : darkVar;
+    };
+
+    // Theme-aware colors
+    const getColors = () => {
+      const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+      if (theme === 'light') {
+        return {
+          particle: '99, 102, 241',   // indigo-500
+          line: '99, 102, 241',
+          lineOpacity: 0.08,
+          particleOpacity: 0.3,
+        };
+      }
+      return {
+        particle: '56, 189, 248',    // sky-400
+        line: '56, 189, 248',
+        lineOpacity: 0.15,
+        particleOpacity: 0.6,
+      };
+    };
+
+    // Create particles
+    const NUM_PARTICLES = 60;
+    const particles = [];
+
+    for (let i = 0; i < NUM_PARTICLES; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: (Math.random() - 0.5) * 0.8,
+        size: Math.random() * 3 + 1,
+      });
+    }
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const colors = getColors();
+
+      // Update and draw particles
+      particles.forEach(p => {
+        // Mouse influence
+        p.x += p.vx + (mouseX - canvas.width / 2) * 0.0001;
+        p.y += p.vy + (mouseY - canvas.height / 2) * 0.0001;
+
+        // Wrap around edges
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+
+        // Draw particle
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${colors.particle}, ${colors.particleOpacity})`;
+        ctx.fill();
+      });
+
+      // Draw connection lines
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 150) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(${colors.line}, ${colors.lineOpacity * (1 - dist / 150)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      animationId = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    // Mouse tracking
+    const onMouseMove = (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    };
+    window.addEventListener('mousemove', onMouseMove);
+
+    // Theme observer (re-draw on theme change)
+    const observer = new MutationObserver(() => {
+      // no need to reset, draw reads colors each frame
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', onMouseMove);
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <section id="hero" className="hero-section">
-      {/* Ambient Motion Background */}
-      <div className="bg-ambient">
-        {[...Array(20)].map((_, i) => (
-          <div key={i} className="particle" />
-        ))}
-      </div>
+      {/* Canvas Particle Background */}
+      <canvas ref={canvasRef} className="particle-canvas" aria-hidden="true" />
 
       <div className="container hero-content">
         <motion.div
@@ -48,7 +171,7 @@ const Hero = () => {
           </motion.h3>
           <motion.p variants={itemVariants} className="subtitle">
             Bridging the gap between cutting-edge AI research and scalable production systems.
-            Specializing in **Multi-Agent Architectures**, **VLA Models**, and **Production MLOps**.
+            Specializing in <strong>Multi-Agent Architectures</strong>, <strong>VLA Models</strong>, and <strong>Production MLOps</strong>.
           </motion.p>
 
           <motion.div variants={itemVariants} className="hero-actions">
@@ -87,70 +210,48 @@ const Hero = () => {
           background: var(--bg-primary);
         }
 
-        /* Ambient Particles */
-        .bg-ambient {
+        .particle-canvas {
           position: absolute;
           inset: 0;
           pointer-events: none;
           z-index: 1;
         }
 
-        .particle {
-          position: absolute;
-          width: 4px;
-          height: 4px;
-          background: var(--accent-primary);
-          border-radius: 50%;
-          opacity: 0.15;
-          filter: blur(1px);
-          animation: float 20s infinite linear;
-        }
-
-        ${[...Array(20)].map((_, i) => `
-          .particle:nth-child(${i + 1}) {
-            left: ${Math.random() * 100}%;
-            top: ${Math.random() * 100}%;
-            animation-delay: ${Math.random() * -20}s;
-            animation-duration: ${15 + Math.random() * 10}s;
-            transform: scale(${0.5 + Math.random()});
+        @media (prefers-reduced-motion: reduce) {
+          .particle-canvas {
+            display: none;
           }
-        `).join('')}
-
-        @keyframes float {
-          0% { transform: translateY(0) translateX(0); }
-          25% { transform: translateY(-20px) translateX(10px); }
-          50% { transform: translateY(-40px) translateX(0); }
-          75% { transform: translateY(-20px) translateX(-10px); }
-          100% { transform: translateY(0) translateX(0); }
         }
-        
+
         .hero-content {
           position: relative;
           z-index: 10;
           max-width: 900px;
         }
-        
+
         .greeting {
           color: var(--accent-primary);
           font-family: var(--font-code);
           font-size: 1.2rem;
           margin-bottom: var(--spacing-xs);
         }
-        
+
         .name {
           font-size: clamp(3rem, 8vw, 5rem);
           font-weight: 800;
+          font-family: var(--font-heading);
           color: var(--text-primary);
           line-height: 1.1;
           margin-bottom: var(--spacing-sm);
-          letter-spacing: -1px;
+          letter-spacing: -2px;
         }
-        
+
         .title {
           font-size: clamp(1.2rem, 4vw, 2rem);
           color: var(--text-secondary);
           margin-bottom: var(--spacing-md);
           font-weight: 500;
+          font-family: var(--font-body);
         }
 
         .separator {
@@ -158,7 +259,7 @@ const Hero = () => {
           opacity: 0.5;
           margin: 0 10px;
         }
-        
+
         .subtitle {
           font-size: 1.2rem;
           color: var(--text-secondary);
@@ -167,16 +268,16 @@ const Hero = () => {
           line-height: 1.7;
         }
 
-        .subtitle b, .subtitle strong {
+        .subtitle strong {
           color: var(--text-primary);
         }
-        
+
         .hero-actions {
           display: flex;
           gap: var(--spacing-md);
           margin-bottom: var(--spacing-lg);
         }
-        
+
         .btn {
           padding: 1rem 2.5rem;
           border-radius: 12px;
@@ -188,24 +289,25 @@ const Hero = () => {
           display: inline-flex;
           align-items: center;
           gap: 10px;
+          font-family: var(--font-body);
         }
-        
+
         .btn-primary {
           background: var(--accent-gradient);
           color: white;
           box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
         }
-        
+
         .btn-primary:hover {
           transform: translateY(-3px);
           box-shadow: 0 8px 25px rgba(56, 189, 248, 0.6);
         }
-        
+
         .btn-outline {
           border: 2px solid var(--accent-primary);
           color: var(--accent-primary);
         }
-        
+
         .btn-outline:hover {
           background: var(--accent-primary);
           color: white;
@@ -246,7 +348,7 @@ const Hero = () => {
           background: rgba(255, 255, 255, 0.08);
           border-color: var(--accent-primary);
           transform: translateY(-5px);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4),
                       0 0 20px rgba(56, 189, 248, 0.2);
         }
 
@@ -308,7 +410,7 @@ const Hero = () => {
         @keyframes blink {
           50% { opacity: 0; }
         }
-        
+
         @media (max-width: 768px) {
           .hero-actions { flex-direction: column; width: 100%; }
           .btn { width: 100%; justify-content: center; }

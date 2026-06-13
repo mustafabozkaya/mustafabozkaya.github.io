@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/global.css';
-import { FaGithub, FaLinkedin, FaBars, FaTimes, FaSun, FaMoon, FaFileAlt } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaBars, FaTimes, FaSun, FaMoon } from 'react-icons/fa';
 import { FiFileText } from 'react-icons/fi';
 
 const Layout = ({ children }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -22,25 +22,28 @@ const Layout = ({ children }) => {
   }, [theme]);
 
   const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
-  const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+  const toggleMenu = () => setMobileMenuOpen(prev => !prev);
+
+  // Close mobile menu on link click
+  const closeMenu = () => setMobileMenuOpen(false);
 
   return (
     <div className="layout">
-      <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+      <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`} aria-label="Main navigation">
         <div className="container nav-container">
-          <a href="#" className="logo">M.Bozkaya</a>
+          <a href="#" className="logo" aria-label="Home">M.Bozkaya</a>
 
           <div className="nav-actions">
             <div className={`nav-links ${mobileMenuOpen ? 'active' : ''}`}>
-              <a href="#hero" onClick={() => setMobileMenuOpen(false)}>Home</a>
-              <a href="#projects" onClick={() => setMobileMenuOpen(false)}>Projects</a>
-              <a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a>
-              <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+              <a href="#hero" onClick={closeMenu}>Home</a>
+              <a href="#projects" onClick={closeMenu}>Projects</a>
+              <a href="#about" onClick={closeMenu}>About</a>
+              <a href="#contact" onClick={closeMenu}>Contact</a>
               <a
                 href="/assets/Mustafa_Bozkaya_CV.pdf"
                 download="Mustafa_Bozkaya_CV.pdf"
                 className="nav-resume-mobile"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={closeMenu}
               >
                 <FiFileText /> Resume
               </a>
@@ -51,15 +54,16 @@ const Layout = ({ children }) => {
                 href="/assets/Mustafa_Bozkaya_CV.pdf"
                 download="Mustafa_Bozkaya_CV.pdf"
                 className="resume-cta"
+                aria-label="Download Resume"
               >
                 <FiFileText style={{ marginRight: '6px' }} /> Resume
               </a>
-              <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle Theme">
+              <button className="theme-toggle" onClick={toggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
                 {theme === 'dark' ? <FaSun /> : <FaMoon />}
               </button>
             </div>
 
-            <button className="mobile-toggle" onClick={toggleMenu}>
+            <button className="mobile-toggle" onClick={toggleMenu} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>
               {mobileMenuOpen ? <FaTimes /> : <FaBars />}
             </button>
           </div>
@@ -68,12 +72,12 @@ const Layout = ({ children }) => {
 
       <main>{children}</main>
 
-      <footer className="footer">
+      <footer className="footer" role="contentinfo">
         <div className="container footer-content">
           <p>&copy; {new Date().getFullYear()} Mustafa Bozkaya. All rights reserved.</p>
           <div className="social-links">
-            <a href="https://github.com/mustafabozkaya" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-            <a href="https://www.linkedin.com/in/mustafa-bozkaya" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+            <a href="https://github.com/mustafabozkaya" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile"><FaGithub /></a>
+            <a href="https://www.linkedin.com/in/mustafa-bozkaya" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"><FaLinkedin /></a>
           </div>
         </div>
       </footer>
@@ -90,23 +94,25 @@ const Layout = ({ children }) => {
           z-index: 1000;
           transition: var(--transition-normal), background 0.3s;
         }
-        
+
         .navbar.scrolled {
           background: var(--glass-bg);
-          backdrop-filter: blur(10px);
+          backdrop-filter: blur(16px) saturate(1.4);
+          -webkit-backdrop-filter: blur(16px) saturate(1.4);
           border-bottom: 1px solid var(--glass-border);
           box-shadow: var(--glass-shadow);
           height: 70px;
         }
-        
+
         .nav-container {
           display: flex;
           justify-content: space-between;
           align-items: center;
           width: 100%;
         }
-        
+
         .logo {
+          font-family: var(--font-heading);
           font-size: 1.5rem;
           font-weight: 700;
           background: var(--accent-gradient);
@@ -120,18 +126,19 @@ const Layout = ({ children }) => {
           align-items: center;
           gap: var(--spacing-md);
         }
-        
+
         .nav-links {
           display: flex;
           gap: var(--spacing-md);
         }
-        
+
         .nav-links a {
           font-weight: 500;
           position: relative;
           color: var(--text-primary);
+          font-family: var(--font-body);
         }
-        
+
         .nav-links a::after {
           content: '';
           position: absolute;
@@ -142,7 +149,7 @@ const Layout = ({ children }) => {
           background: var(--accent-gradient);
           transition: width var(--transition-fast);
         }
-        
+
         .nav-links a:hover::after {
           width: 100%;
         }
@@ -181,6 +188,7 @@ const Layout = ({ children }) => {
           font-size: 0.9rem;
           transition: transform 0.2s, box-shadow 0.2s;
           box-shadow: 0 4px 10px rgba(56, 189, 248, 0.3);
+          font-family: var(--font-body);
         }
 
         .resume-cta:hover {
@@ -196,61 +204,71 @@ const Layout = ({ children }) => {
           color: var(--accent-primary) !important;
           font-weight: 700;
         }
-        
+
         .mobile-toggle {
           display: none;
           color: var(--text-primary);
           font-size: 1.5rem;
         }
-        
+
         .footer {
           background: var(--bg-secondary);
           padding: var(--spacing-md) 0;
           margin-top: var(--spacing-lg);
           border-top: 1px solid var(--glass-border);
         }
-        
+
         .footer-content {
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
-        
+
+        .footer-content p {
+          font-family: var(--font-body);
+        }
+
         .social-links {
           display: flex;
           gap: var(--spacing-sm);
         }
-        
+
         .social-links a {
           font-size: 1.5rem;
           color: var(--text-secondary);
         }
-        
+
         .social-links a:hover {
           color: var(--accent-primary);
           transform: translateY(-2px);
         }
-        
+
         @media (max-width: 768px) {
           .nav-links {
             position: fixed;
             top: 70px;
             left: 0;
             right: 0;
-            background: var(--bg-secondary);
+            background: var(--bg-primary);
+            backdrop-filter: blur(20px);
             flex-direction: column;
             align-items: center;
             padding: var(--spacing-md);
-            transform: translateY(-150%);
-            transition: transform var(--transition-normal);
+            transform: translateY(-120%);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.3s ease;
             border-bottom: 1px solid var(--glass-border);
             box-shadow: var(--glass-shadow);
+            pointer-events: none;
           }
-          
+
           .nav-links.active {
             transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
           }
-          
+
           .mobile-toggle {
             display: block;
           }
@@ -262,7 +280,7 @@ const Layout = ({ children }) => {
           .resume-cta {
             display: none;
           }
-          
+
           .footer-content {
             flex-direction: column;
             gap: var(--spacing-sm);

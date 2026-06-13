@@ -13,8 +13,21 @@ html {
 }
 
 body {
+    font-family: var(--font-body);
     min-height: 100vh;
+    background: var(--bg-primary);
+    color: var(--text-primary);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+}
+
+code, pre, .mono {
+    font-family: var(--font-code);
 }
 
 a {
@@ -72,7 +85,7 @@ img {
 }
 
 .section-title {
-    font-size: 2.5rem;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     text-align: center;
     margin-bottom: var(--spacing-lg);
     background: var(--accent-gradient);
@@ -80,4 +93,18 @@ img {
     background-clip: text;
     color: transparent;
     font-weight: 700;
+    letter-spacing: -1px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .bg-ambient {
+        display: none;
+    }
 }

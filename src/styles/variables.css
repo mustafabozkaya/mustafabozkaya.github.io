@@ -18,19 +18,24 @@
 
   --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 
-  /* Shared */
-  --font-main: 'Roboto', sans-serif;
-  --font-code: 'Fira Code', monospace;
+  /* Modern Font Stack */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-code: 'JetBrains Mono', monospace;
+
+  /* Spacing */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 2rem;
   --spacing-lg: 4rem;
+
+  /* Transitions */
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
 }
 
 [data-theme='light'] {
-  --bg-primary: #f8fafc;
+  --bg-primary: #fafbfc;
   --bg-secondary: #ffffff;
   --bg-tertiary: #f1f5f9;
 
@@ -38,13 +43,13 @@
   --text-secondary: #475569;
   --text-accent: #0284c7;
 
-  --accent-primary: #0284c7;
-  --accent-secondary: #4f46e5;
-  --accent-gradient: linear-gradient(135deg, #0284c7 0%, #4f46e5 100%);
+  --accent-primary: #6366f1;
+  --accent-secondary: #8b5cf6;
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
 
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(0, 0, 0, 0.1);
-  --glass-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.04);
 
-  --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
