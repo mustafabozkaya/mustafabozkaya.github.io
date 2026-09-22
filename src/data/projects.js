@@ -291,13 +291,25 @@ export const projects = [
         repoLink: 'https://github.com/mustafabozkaya'
     },
     {
-        id: 'discord-bot-go',
-        title: 'ChatGPT Discord Bot',
-        shortDescription: 'A scalable, event-driven Discord microservice built in Go.',
-        longDescription: 'Developed a high-performance Discord bot in Go, integrating OpenAI\'s GPT models to provide intelligent, real-time responses. The backend is designed as a scalable microservice.',
-        categories: ['Go', 'Web'],
-        technologies: ['Go', 'Discordgo', 'OpenAI API', 'Docker'],
-        images: ['./assets/ai_arch_cover.png'],
-        repoLink: 'https://github.com/mustafabozkaya/chatgpt-discord-bot'
-    }
-];
+            id: 'discord-bot-go',
+            title: 'ChatGPT Discord Bot',
+            shortDescription: 'A scalable, event-driven Discord microservice built in Go.',
+            longDescription: 'Developed a high-performance Discord bot in Go, integrating OpenAI\'s GPT models to provide intelligent, real-time responses. The backend is designed as a scalable microservice.',
+            categories: ['Go', 'Web'],
+            technologies: ['Go', 'Discordgo', 'OpenAI API', 'Docker'],
+            images: ['./assets/ai_arch_cover.png'],
+            repoLink: 'https://github.com/mustafabozkaya/chatgpt-discord-bot'
+        },
+
+        // --- N8N WORKFLOWS (NEW) ---
+        {
+            id: 'n8n-workflows',
+            title: 'n8n Workflow Collection',
+            shortDescription: '6 production-ready n8n workflows with AI agents, tool calling, and structured outputs.',
+            longDescription: 'A curated collection of 6 production-grade n8n workflow templates covering logistics AI agents, CRM automation, GitHub code review, RAG pipelines, multi-agent orchestration, and social media content distribution. Each workflow features AI agent nodes with tool calling, structured output parsers, duplicate prevention, error handling, and production patterns. Built for the logistics and automation industry.',
+            categories: ['Agentic AI', 'Automation', 'DevOps'],
+            technologies: ['n8n', 'LangChain', 'OpenAI', 'Qdrant', 'Webhook', 'Docker'],
+            images: ['https://raw.githubusercontent.com/n8n-io/n8n/main/packages/n8n-public/images/n8n-logo.png'],
+            repoLink: 'https://github.com/mustafabozkaya/n8n-workflows'
+        }
+    ];
