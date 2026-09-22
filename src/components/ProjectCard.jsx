@@ -55,10 +55,13 @@ const ProjectCard = ({ project, onClick }) => {
 
       <div className="card-content">
         <div className="card-tags">
-          {project.categories.slice(0, 3).map((cat, i) => (
-            <span key={i} className="tag">{cat.replace('_', ' ')}</span>
-          ))}
-        </div>
+                {project.categories.slice(0, 2).map((cat, i) => (
+                  <span key={i} className="tag">{cat.replace('_', ' ')}</span>
+                ))}
+                {project.tags && project.tags.slice(0, 3).map((tag, i) => (
+                  <span key={i} className="tag tag-tech">{tag}</span>
+                ))}
+              </div>
         <h3 className="card-title">{project.title}</h3>
         <p className="card-desc">{project.shortDescription}</p>
       </div>
