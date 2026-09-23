@@ -212,7 +212,7 @@ const ProjectModal = ({ project, onClose }) => {
   );
 };
 
-const categories = ['All', 'Agentic AI', 'Machine Learning', 'MCP', 'Computer Vision', 'Robotics', 'Web', 'Mobile', 'Automation', 'DevOps'];
+const categories = ['All', 'Agentic AI', 'Machine Learning', 'MCP', 'Computer Vision', 'Robotics', 'Web', 'Mobile', 'Automation', 'DevOps', 'n8n'];
 
 const Projects = () => {
   const [filter, setFilter] = useState('All');
